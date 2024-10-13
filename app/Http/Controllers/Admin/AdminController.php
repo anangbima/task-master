@@ -16,10 +16,14 @@ class AdminController extends Controller
 
     // Akses halaman dashboard admin
     public function index () {
-        return view('admin.index');
+        $data = [
+            'title'     => 'Dashboard',
+            'page'      => 'dashboard'
+        ];
+
+        return view('admin.index', $data);
     }
 
-    // Akses halaman profile
     // Akses halaman profile
     public function profile () {
         return view('admin.profile');
