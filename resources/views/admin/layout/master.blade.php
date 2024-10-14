@@ -94,9 +94,9 @@
                             </a>
                         </li>
 
-                        <li class="mt-5 sidebar-item text-center">
+                        {{-- <li class="mt-5 sidebar-item text-center">
                             <a href="{{ url('/logout') }}" class="btn btn-outline-primary" class="sidebar-link">Logout</a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>
@@ -152,9 +152,17 @@
                         </svg>
                     </div>
 
-                    <div class="btn btn-primary">
-                        {{ auth()->user()->name }}
-                        <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 30px; height: 30px"></img>
+                    <div class="btn-group">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                                <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 30px; height: 30px"></img>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ route('admin-profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

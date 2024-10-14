@@ -10,10 +10,11 @@ class UserController
     // Get data user
     public function index () {
         $data = [
-            'title'     => 'User',
+            'title'     => 'Users',
+            'page'      => 'user',
             'users'     => User::get(),
         ];
 
-        return view('admin.user.index', $data);
+        return view('admin.user', $data);
     }
 }

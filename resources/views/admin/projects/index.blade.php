@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="mb-4 d-flex justify-content-between align-items-center">
-        <a href="{{ route('projects.create') }}" class="btn btn-primary">Create New</a>
+        <a href="{{ route('projects.create') }}" class="btn btn-primary rounded">Create New</a>
 
         <div>
             <input type="text" placeholder="Search" class="form-control">

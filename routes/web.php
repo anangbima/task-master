@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MemberProjectController as AdminMemberProjectCont
 use App\Http\Controllers\Admin\MemberTaskController as AdminMemberTaskController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\TaskController as AdminTaskController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,9 @@ Route::middleware(['auth'])->group( function () {
             Route::resource('member-task', AdminMemberTaskController::class)->only([
                 'store', 'destroy'
             ]);
+
+            Route::get('user', [AdminUserController::class, 'index'])->name('admin-user');
+            Route::get('profile', [AdminAdminController::class, 'profile'])->name('admin-profile');
         });
     });
 

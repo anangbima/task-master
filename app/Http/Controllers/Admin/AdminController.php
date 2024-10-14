@@ -26,6 +26,11 @@ class AdminController extends Controller
 
     // Akses halaman profile
     public function profile () {
-        return view('admin.profile');
+        $data = [
+            'title'     => 'Profile',
+            'page'      => 'profile'
+        ];
+
+        return view('admin.profile', $data);
     }
 }
