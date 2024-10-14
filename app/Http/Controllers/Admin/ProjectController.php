@@ -21,6 +21,7 @@ class ProjectController extends Controller
     public function index() {
         $data = [
             'title'     => 'Projects',
+            'page'      => 'projects',
             'projects'  => Project::with('member', 'task')->get(), 
         ];
 
@@ -30,6 +31,16 @@ class ProjectController extends Controller
     // Display specific projects
     public function show(Project $project) {
         
+    }
+
+    // Display create data
+    public function create(){
+        $data = [
+            'title'     => 'Create Projects',
+            'page'      => 'projects',
+        ];
+
+        return view('admin.projects.create', $data);
     }
 
     // Store data projects

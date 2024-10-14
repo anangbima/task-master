@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MemberTaskController as AdminMemberTaskController
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\TaskController as AdminTaskController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -45,9 +46,10 @@ Route::middleware(['auth'])->group( function () {
 
     // Route user
     Route::middleware(['role:user'])->group(function () {
-        // Route::resource('projects', ProjectController::class)->parameters([
-        //     'projects'  => 'project:slug'
-        // ]);
-        // Route::resource('tasks', TaskController::class);
+        Route::prefix('user')->group(function () {
+            Route::get('/index', [UserUserController::class, 'index'])->name('user-index');
+        });
     });
 });
+
+Route::get('/test', [UserUserController::class, 'index']);
