@@ -30,7 +30,13 @@ class ProjectController extends Controller
 
     // Display specific projects
     public function show(Project $project) {
-        
+        $data = [
+            'title'     => $project->name,
+            'page'      => 'projects',
+            'project'   => $project
+        ];
+
+        return view('admin.projects.show', $data);
     }
 
     // Display create data
@@ -57,7 +63,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('projects');
+        return redirect('admin.projects');
     }
 
     // Update spesific data in project
@@ -65,7 +71,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project->update($data);
 
-        return redirect('projects');
+        return redirect('admin.projects');
     }
 
     // Remove spesific data in project
@@ -86,6 +92,6 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('projects');
+        return redirect('admin.projects');
     }
 }

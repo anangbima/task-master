@@ -7,14 +7,29 @@
             @csrf
 
             <div class="mb-3">
-                <label for="">Name</label>
-                <input type="text" class="form-control" name="name" >
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
+                <div class="invalid-feedback">
+                    <i class="bx bx-radio-circle"></i>
+                    @error('name')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
+
             <div class="mb-3">
                 <label for="">Description</label>
-                <input type="text" class="form-control" name="description">
+                <textarea id="editor" name="description" class="form-control @error('description') is-invalid @enderror"></textarea>
+                <div class="invalid-feedback">
+                    <i class="bx bx-radio-circle"></i>
+                    @error('description')
+                        {{ $message }}
+                    @enderror
+                </div>
             </div>
-            <div class="mt-3">
+
+            
+            <div class="mt-3 ">
                 <input type="submit" class="btn btn-primary" value="Submit">
             </div>
         </form>

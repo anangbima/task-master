@@ -33,6 +33,11 @@
     <link rel="stylesheet" href="{{ url('/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="<?= url('/assets/compiled/css/iconly.css') ?>">
 
+    <link rel="stylesheet" href="{{ url('/assets/compiled/css/ui-widgets-todolist.css') }}">
+    <link rel="stylesheet" href="{{ url('/assets/extensions/dragula/dragula.min.css') }}">
+
+    
+
     <style>
         .ck-editor__editable {
             min-height: 300px;
