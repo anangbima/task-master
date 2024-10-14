@@ -63,7 +63,18 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('admin.projects');
+        return redirect('/admin/projects');
+    }
+
+    // Display edit data
+    public function edit(Project $project) {
+        $data = [
+            'title'     => 'Update Projects',
+            'page'      => 'projects',
+            'project'   => $project
+        ];
+
+        return view('admin.projects.update', $data);
     }
 
     // Update spesific data in project
@@ -71,7 +82,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project->update($data);
 
-        return redirect('admin.projects');
+        return redirect('/admin/projects');
     }
 
     // Remove spesific data in project
@@ -92,6 +103,6 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('admin.projects');
+        return redirect('/admin/projects');
     }
 }
