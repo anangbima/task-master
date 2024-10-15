@@ -22,11 +22,6 @@ class AuthController extends Controller
 
     // Proses Login
     public function prosesLogin(LoginRequest $request) {
-        // $request->validate([
-        //     'email'     => 'required',
-        //     'password'  => 'required',
-        // ]);
-
         $request->validated();
 
         $credential = $request->only('email', 'password');

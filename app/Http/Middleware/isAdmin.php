@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckMemberProject
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,18 @@ class CheckMemberProject
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if($request->project->member->contains('user_id', $user->id)){
+
+        if (!$user) {
+            // Handle unauthorized access (e.g., redirect to login)
+            return redirect()->route('login');
+        }
+
+        if ($user->role == 'admin') {
+            // Allow admin access
             return $next($request);
         }
 
-        return back();
+        // Handle unauthorized access for non-admin users (e.g., redirect to a specific route)
+        return redirect()->route('unauthorized');
     }
 }

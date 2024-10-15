@@ -46,6 +46,20 @@ class User extends Authenticatable
         ];
     }
 
+    // Initial dari nama untuk avatar
+    public function getInitialsAttribute() {
+        $words = explode(' ', $this->name);
+        $initials = '';
+
+        foreach ($words as $word ) {
+            $initials .= strtoupper(substr($word, 0, 1)); 
+        }
+
+        return $initials;
+    }
+
+    
+
     // relasi dengan tabel member project
     public function memberProject () {
         return $this->hasMany(MemberProject::class);

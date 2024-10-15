@@ -158,7 +158,9 @@
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ auth()->user()->name }}
-                                <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 30px; height: 30px"></img>
+                                <div class="avatar bg-warning ms-2">
+                                    <span class="avatar-content">{{ auth()->user()->initials }}</span>
+                                </div>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ route('admin-profile') }}">Profile</a>

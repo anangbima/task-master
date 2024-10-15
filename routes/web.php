@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Route admin 
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['isAdmin'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/', [AdminAdminController::class, 'index'])->name('dashboard-admin');
 
@@ -53,16 +53,22 @@ Route::middleware(['auth'])->group( function () {
     });
 
     // Route user
-    Route::middleware(['role:user'])->group(function () {
+    Route::middleware(['isUser'])->group(function () {
         Route::get('/', [UserUserController::class, 'index'])->name('user-index');
         Route::get('profile', [UserUserController::class, 'profile'])->name('user-profile');
 
         Route::resource('projects', UserProjectController::class)->only('show')->parameters([
             'projects'          => 'project:slug',
-        ])->middleware('memberProject');
+        ])->middleware('iMemberProject');
 
         
     });
 });
 
-// Route::get('/test', [UserUserController::class, 'index']);
+
+
+// Route page error
+Route::get('unauthorized', function() {
+    return view('errors.403');
+})->name('unauthorized');
+

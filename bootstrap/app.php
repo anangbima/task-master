@@ -16,8 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         // $middleware->append(CheckRole::class);
         $middleware->alias([
-            'role'              =>  \App\Http\Middleware\CheckRole::class,
-            'memberProject'     =>  \App\Http\Middleware\CheckMemberProject::class,
+            'isAdmin'           =>  \App\Http\Middleware\isAdmin::class,
+            'isUser'            =>  \App\Http\Middleware\isUser::class,
+            'ismemberProject'   =>  \App\Http\Middleware\isMemberProject::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
