@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Project::class);
             $table->string('title');
             $table->text('description');
+            $table->enum('priority', ['High', 'Medium', 'Low']);
             $table->dateTime('deadline');
             $table->enum('status', ['Done', 'On going', 'Not Started']);
             $table->timestamps();

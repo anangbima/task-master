@@ -71,4 +71,19 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+    // proses update image
+    public function updateImage() {
+
+    }
+
+    // proses delete image
+    public function removeImage() {
+
+    }
+
+    // proses update password
+    public function updatePassword() {
+
+    }
 }

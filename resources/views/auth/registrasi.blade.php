@@ -12,7 +12,7 @@
 
                         <div class="mb-3">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
+                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                             <div class="invalid-feedback">
                                 <i class="bx bx-radio-circle"></i>
                                 @error('name')
@@ -22,7 +22,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
                             <div class="invalid-feedback">
                                 <i class="bx bx-radio-circle"></i>
                                 @error('email')

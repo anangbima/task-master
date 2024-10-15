@@ -26,4 +26,9 @@ class Task extends Model
     public function member () {
         return $this->hasMany(MemberTask::class);
     }
+
+    // Relasi dengan tabel coment
+    public function coment () {
+        return $this->hasMany(MemberTask::class);
+    }
 }
