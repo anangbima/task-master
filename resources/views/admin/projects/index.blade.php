@@ -18,7 +18,7 @@
                         {{ $project->name }}
                     </div>
 
-                    <div class="d-flex gap-2 ">
+                    <div class="d-flex gap-2">
                         <a class="btn btn-success btn-sm" href="{{ route('projects.edit', $project) }}" style="z-index: 2;">Edit</a>
                         <form style="z-index: 2;" action="{{ route('projects.destroy', $project) }}" method="POST">
                             @method('DELETE')

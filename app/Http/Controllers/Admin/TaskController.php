@@ -56,7 +56,7 @@ class TaskController extends Controller
         $data = $request->validated();
         $task->update($data);
 
-        return redirect('projects');
+        return back();
     }
 
     // Remove spesific data in project

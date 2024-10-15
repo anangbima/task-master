@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="position-relative">
-        <div class="position-absolute ">
+    <div class="position-relative w-100" style="height: 90vh">
+        <div class="position-absolute top-50 start-50 translate-middle ">
             <div class="card " style="width: 480px">
                 <div class="card-body">
                     <form class="mt-3" action="{{ route('proses-login') }}" method="post">

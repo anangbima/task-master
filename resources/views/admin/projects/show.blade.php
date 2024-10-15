@@ -210,7 +210,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="d-flex mt-3 gap-2">
                             <a class="btn btn-success btn-sm" href="{{ route('tasks.edit', $task) }}" style="z-index: 2;">Edit</a>
                             <form style="z-index: 2;" action="{{ route('tasks.destroy', $task) }}" method="POST">
                                 @method('DELETE')
