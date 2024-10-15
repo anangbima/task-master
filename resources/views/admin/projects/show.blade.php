@@ -284,7 +284,7 @@
                         <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width:32px; height: 32px"></img>
 
                         <div>
-                            User name
+                            {{ $member->user->name }}
                         </div>
                     </div>
 

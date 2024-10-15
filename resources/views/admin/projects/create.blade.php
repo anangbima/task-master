@@ -34,6 +34,14 @@
                     <label for="member">{{ $user->name }}</label>
                 </div>
             @endforeach
+
+            <input type="text" class="form-control" id="select-user">
+            
+            <div class="position-relative">
+                <div class="card p-3 border rounded-1 position-absolute w-100" id="list-user">
+                    
+                </div>
+            </div>
             
             <div class="mt-3 ">
                 <input type="submit" class="btn btn-primary" value="Submit">
@@ -41,4 +49,25 @@
         </form>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            let users = {!! $users->toJson() !!}
+            $('#list-user').hide();
+
+            $('#select-user').on('change keyup', function() {
+                let value = $(this).val();
+                
+                $('#list-user').show();
+
+                let filterUser = users.filter(function(item) {
+                    return item.name == value;
+                })
+
+                $.each(filterUser, function(index, item) {
+                    $('#list-user').append('<li>' + item.name + '</li>');
+                })
+            })
+        });
+    </script>
+</script>
 @endsection

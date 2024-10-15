@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // relasi dengan tabel member project
+    public function memberProject () {
+        return $this->hasMany(MemberProject::class);
+    }
+
+    // relasi dengan tabel member project
+    public function memberTask () {
+        return $this->hasMany(MemberTask::class);
+    }
 }

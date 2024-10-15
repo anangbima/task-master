@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group( function () {
         Route::resource('projects', UserProjectController::class)->only('show')->parameters([
             'projects'          => 'project:slug',
         ])->middleware('memberProject');
+
+        
     });
 });
 

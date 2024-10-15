@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container-fluid px-3">
+    <div class="container mt-5">
         <div>
             <h5>{{ $project->name }}</h5>
         </div>
