@@ -21,6 +21,7 @@ class MemberProjectController extends Controller
             ]);
         }
 
+        session()->flash('success', 'Successfully add member');
         return back();
     }
 
@@ -28,6 +29,7 @@ class MemberProjectController extends Controller
     public function destroy(MemberProject $memberProject) {
         $memberProject->delete();
 
+        session()->flash('success', 'Successfully remove member');
         return back();
     }
 }

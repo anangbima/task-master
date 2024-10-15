@@ -21,6 +21,6 @@ class isMemberProject
             return $next($request);
         }
 
-        return back();
+        return redirect()->route('unauthorized');
     }
 }

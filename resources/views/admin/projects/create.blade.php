@@ -9,7 +9,7 @@
             <div class="mb-3">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" value="{{ old('name') }}">
                     <i class="bx bx-radio-circle"></i>
                     @error('name')
                         {{ $message }}
@@ -19,7 +19,7 @@
 
             <div class="mb-3">
                 <label for="">Description</label>
-                <textarea id="editor" name="description" class="form-control @error('description') is-invalid @enderror"></textarea>
+                <textarea id="editor" name="description" class="form-control @error('description') is-invalid @enderror">{!! old('description') !!}</textarea>
                 <div class="invalid-feedback">
                     <i class="bx bx-radio-circle"></i>
                     @error('description')

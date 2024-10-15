@@ -222,8 +222,11 @@
                 </div>   
             </div>
         @empty
-            <div>
-                No task yet
+            <div class="w-100 position-relative" style="min-height: 500px">
+                <div class="position-absolute top-50 start-50 translate-middle text-center">
+                    <h5>No Tasks</h5>
+                    <div>There is no task available on this list yet.</div>
+                </div>
             </div>
         @endforelse
     </div>
@@ -301,11 +304,40 @@
                     </div>
                 </div>
             @empty
-                <div>
-                    No memebr added yet
+                <div class="w-100 position-relative" style="min-height: 400px">
+                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                        <h5>No Members</h5>
+                        <div>There is no data available on this list yet.</div>
+                    </div>
                 </div>
             @endforelse
         </div>
     </div>
+
+    {{-- proses untuk mengambil pesan succes --}}
+    @if (session()->get('success'))
+
+        <div class="swal-success" data-swal="{{session()->get('success')}}"></div>
+
+    @endif
+
+    <script>
+        $(document).ready(function(){
+
+            const swalSuccess = $('.swal-success').data('swal');
+            const message = $('.swal-success').attr('data-swal');
+
+            if(swalSuccess){
+
+                Swal2.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    </script>
 
 @endsection

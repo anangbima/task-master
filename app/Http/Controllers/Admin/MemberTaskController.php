@@ -18,6 +18,7 @@ class MemberTaskController extends Controller
             'task_id'       => $data['task_id']
         ]);
 
+        session()->flash('success', 'Successfully add member');
         return redirect('projects');
     }
 
@@ -25,6 +26,7 @@ class MemberTaskController extends Controller
     public function destroy(MemberTask $memberTask) {
         $memberTask->delete();
 
+        session()->flash('success', 'Successfully add member');
         return redirect('projects');
     }
 }

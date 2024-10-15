@@ -45,7 +45,7 @@ class TaskController extends Controller
             }
         }
 
-        // return redirect('projects');
+        session()->flash('success', 'Successfully add task');
         return back();
     }
 
@@ -56,6 +56,7 @@ class TaskController extends Controller
         $data = $request->validated();
         $task->update($data);
 
+        session()->flash('success', 'Successfully update task');
         return back();
     }
 
@@ -70,6 +71,7 @@ class TaskController extends Controller
             }
         }
 
-        return redirect('projects');
+        session()->flash('success', 'Successfully delete task');
+        return back();
     }
 }

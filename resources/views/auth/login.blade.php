@@ -6,11 +6,18 @@
         <div class="position-absolute top-50 start-50 translate-middle ">
             <div class="card " style="width: 480px">
                 <div class="card-body">
+
+                    @error('error')
+                        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                            <span class="alert-inner--text"><strong>Warning!</strong>  {{ $message }}</span>
+                        </div>
+                    @enderror
+
                     <form class="mt-3" action="{{ route('proses-login') }}" method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
                             <div class="invalid-feedback">
                                 <i class="bx bx-radio-circle"></i>
                                 @error('email')

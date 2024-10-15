@@ -35,8 +35,11 @@
                         <a href="{{ url('/projects/'.$project->slug) }}" class="stretched-link"></a>
                     </div>
                 @empty
-                    <div>
-                        No Project yet
+                    <div class="w-100 position-relative" style="min-height: 500px">
+                        <div class="position-absolute top-50 start-50 translate-middle text-center">
+                            <h5>No Projects</h5>
+                            <div>It seems you don't have any projects yet</div>
+                        </div>
                     </div>
                 @endforelse
             </div>

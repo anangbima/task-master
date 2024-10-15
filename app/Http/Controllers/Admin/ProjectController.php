@@ -67,6 +67,7 @@ class ProjectController extends Controller
             }
         }
 
+        session()->flash('success', 'Successfully add project');
         return redirect('/admin/projects');
     }
 
@@ -86,6 +87,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project->update($data);
 
+        session()->flash('success', 'Successfully update project');
         return redirect('/admin/projects');
     }
 
@@ -107,6 +109,7 @@ class ProjectController extends Controller
             }
         }
 
+        session()->flash('success', 'Successfully delete project');
         return redirect('/admin/projects');
     }
 }

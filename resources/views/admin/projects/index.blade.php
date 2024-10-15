@@ -10,7 +10,7 @@
         </div>
     </div>
     
-    @foreach ($projects as $project)
+    @forelse ($projects as $project)
         <div class="card mb-3">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -31,6 +31,39 @@
 
             <a href="{{ url('/admin/projects/'.$project->slug) }}" class="stretched-link"></a>
         </div>
-    @endforeach
+    @empty
+        <div class="w-100 position-relative" style="min-height: 600px">
+            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                <h5>No Projects</h5>
+                <div>There is no data available on this list yet.</div>
+            </div>
+        </div>
+    @endforelse
+
+    {{-- proses untuk mengambil pesan succes --}}
+    @if (session()->get('success'))
+
+        <div class="swal-success" data-swal="{{session()->get('success')}}"></div>
+
+    @endif
+
+    <script>
+        $(document).ready(function(){
+
+            const swalSuccess = $('.swal-success').data('swal');
+            const message = $('.swal-success').attr('data-swal');
+
+            if(swalSuccess){
+
+                Swal2.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    </script>
 
 @endsection

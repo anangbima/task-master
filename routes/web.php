@@ -12,10 +12,6 @@ use App\Http\Controllers\User\ProjectController as UserProjectController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
@@ -59,7 +55,7 @@ Route::middleware(['auth'])->group( function () {
 
         Route::resource('projects', UserProjectController::class)->only('show')->parameters([
             'projects'          => 'project:slug',
-        ])->middleware('iMemberProject');
+        ])->middleware('isMemberProject');
 
         
     });
