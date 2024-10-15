@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Project::class);
             $table->foreignIdFor(User::class);
+            $table->string('role');
             $table->timestamps();
         });
     }

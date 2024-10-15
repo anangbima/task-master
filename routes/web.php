@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\TaskController as AdminTaskController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\ProjectController as UserProjectController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [AuthController::class, 'login'])->name('login');
+// Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
 Route::post('/peoses-login', [AuthController::class, 'prosesLogin'])->name('proses-login');
@@ -51,7 +52,8 @@ Route::middleware(['auth'])->group( function () {
     // Route user
     Route::middleware(['role:user'])->group(function () {
         Route::prefix('user')->group(function () {
-            Route::get('/index', [UserUserController::class, 'index'])->name('user-index');
+            Route::get('/', [UserUserController::class, 'index']);
+            // Route::get('projects', [UserProjectController::class, 'index']);
         });
     });
 });
