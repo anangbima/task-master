@@ -44,9 +44,11 @@
     <script src="<?= url('/assets/static/js/initTheme.js') ?>"></script>
     <div id="app">
         <div class="d-flex justify-content-between container-fluid align-items-center">
-            <h2>Navbar</h2>
+            <div class="p-3">
+                <h2>Taskmaster</h2>
+            </div>
 
-            <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+            <div class="theme-toggle d-flex gap-2 align-items-center p-3">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
                     role="img" class="iconify iconify--system-uicons" width="20" height="20"
                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -76,7 +78,9 @@
             </div>
         </div>
         
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 
     <script src="{{ url('/assets/static/js/components/dark.js')}} "></script>

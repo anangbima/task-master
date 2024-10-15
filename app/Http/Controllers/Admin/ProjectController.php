@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\MemberProject;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -33,7 +34,8 @@ class ProjectController extends Controller
         $data = [
             'title'     => $project->name,
             'page'      => 'projects',
-            'project'   => $project
+            'project'   => $project,
+            'users'     => User::where('role', 'user')->get() // temporary
         ];
 
         return view('admin.projects.show', $data);
@@ -44,6 +46,7 @@ class ProjectController extends Controller
         $data = [
             'title'     => 'Create Projects',
             'page'      => 'projects',
+            'users'     => User::where('role', 'user')->get()
         ];
 
         return view('admin.projects.create', $data);

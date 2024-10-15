@@ -10,11 +10,11 @@
         <h5>Task</h5>
 
         <div >
-            <a href="#" class="btn btn-primary">Create new</a>
+            <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create new</a>
         </div>
     </div> 
 
-    <section class="tasks">
+    {{-- <section class="tasks">
         <div class="card widget-todo">
             <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                 <h4 class="card-title d-flex">
@@ -175,71 +175,136 @@
                 </ul>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    {{-- <div class="row">
-        <div class="col-lg-4 col-sm-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h6>Task 1</h6>
+    <div class="row">
+        @forelse ($project->task as $task)
+            <div class="col-lg-4 col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>{{ $task->title }}</h6>
 
-                    <div class="progress progress-sm mt-3" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-success" style="width: 25%"></div>
-                    </div>
+                        <div class="progress progress-sm mt-3" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" style="width: 25%"></div>
+                        </div>
 
-                    <div class="mt-4 d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="badge rounded-pill text-bg-danger text-sm px-2" style="font-size: 12px">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <i class="bi bi-calendar2-event"></i> 10 Oct 2025
+                        <div class="mt-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge rounded-pill text-bg-danger text-sm px-2" style="font-size: 12px">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="bi bi-calendar2-event"></i> 
+                                    </div>
+                                </span>
+                            </div>
+        
+                            <div class="d-flex">
+                                <div style="margin-left: -10px">
+                                    <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
                                 </div>
-                            </span>
+                                <div style="margin-left: -10px">
+                                    <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
+                                </div>
+                                <div style="margin-left: -10px">
+                                    <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
+                                </div>
+                            </div>
                         </div>
-    
-                        <div class="d-flex">
-                            <div style="margin-left: -10px">
-                                <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                            </div>
-                            <div style="margin-left: -10px">
-                                <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                            </div>
-                            <div style="margin-left: -10px">
-                                <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                            </div>
+
+                        <div class="mt-3">
+                            <a class="btn btn-success btn-sm" href="{{ route('tasks.edit', $task) }}" style="z-index: 2;">Edit</a>
+                            <form style="z-index: 2;" action="{{ route('tasks.destroy', $task) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                            </form>
                         </div>
                     </div>
-                </div>
-            </div>   
-        </div>
-    </div> --}}
+                </div>   
+            </div>
+        @empty
+            <div>
+                No task yet
+            </div>
+        @endforelse
+    </div>
 
     <div class="mb-3 d-flex align-items-center justify-content-between">
         <h5>Member</h5>
 
         <div>
-            <a href="#" class="btn btn-primary">Add</a>
+            <a href="#" class="btn btn-primary" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#addMember">Add</a>
+        </div>
+
+        <div class="modal fade text-left modal-borderless" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Member</h5>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+
+                    <form action="{{ route('member-project.store') }}" method="POST">
+                        @csrf
+
+                        <div class="modal-body">
+                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                            @foreach ($users as $user)
+                                <div>
+                                    <input type="checkbox" name="user_id[]" id="member" value="{{ $user->id }}">
+                                    <label for="member">{{ $user->name }}</label>
+                                </div>
+                            @endforeach
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                            {{-- <button type="button" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Accept</span>
+                            </button> --}}
+                            <input type="submit" class="btn btn-primary" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div> 
 
     <div class="mb-3 card">
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width:32px; height: 32px"></img>
+            @forelse ($project->member as $member)
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width:32px; height: 32px"></img>
+
+                        <div>
+                            User name
+                        </div>
+                    </div>
+
+                    <div class="fst-italic font-weight-light">
+                        Add on {{ $member->created_at}}
+                    </div>
 
                     <div>
-                        Nama User
+                        <form style="z-index: 2;" action="{{ route('member-project.destroy', $member) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input class="btn btn-danger btn-sm" type="submit" value="Remove">
+                        </form>
                     </div>
                 </div>
-
-                <div class="fst-italic font-weight-light">
-                    Add on 
-                </div>
-
+            @empty
                 <div>
-                    <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
+                    No memebr added yet
                 </div>
-            </div>
+            @endforelse
         </div>
     </div>
 

@@ -7,10 +7,23 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\MemberTask;
 use App\Models\Task;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    // Display create data
+    public function create(){
+        $data = [
+            'title'     => 'Create Tasks',
+            'page'      => 'Tasks',
+            'users'     => User::where('role', 'user')->get() // temporary
+        ];
+
+        return view('admin.tasks.create', $data);
+    }
+
     // Store data task 
     public function store(StoreTaskRequest $request) {
         $data = $request->validated();
@@ -18,7 +31,7 @@ class TaskController extends Controller
         $task = Task::create([
             'title'         => $data['title'],
             'description'   => $data['description'],
-            'deadline'      => '0000-00-00 00:00:00',
+            'deadline'      => Carbon::now(), // temp
             'status'        => 'Not Started',
             'project_id'    => '1', // statis
         ]);
@@ -32,8 +45,11 @@ class TaskController extends Controller
             }
         }
 
-        return redirect('projects');
+        // return redirect('projects');
+        return back();
     }
+
+    
 
     // Update spesific data in task 
     public function update(UpdateTaskRequest $request, Task $task) {

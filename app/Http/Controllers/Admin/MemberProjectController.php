@@ -12,18 +12,21 @@ class MemberProjectController extends Controller
     public function store(StoreMemberProjectRequest $request) {
         $data = $request->validated();
 
-        MemberProject::create([
-            'user_id'       => $data['user_id'],
-            'project_id'    => $data['project_id']
-        ]);
+        foreach($data['user_id'] as $value) {
+            // pindah modal
+            MemberProject::create([
+                'user_id'       => $value,
+                'project_id'    => $request->project_id
+            ]);
+        }
 
-        return redirect('projects');
+        return back();
     }
 
     // Remove specific member in project
     public function destroy(MemberProject $memberProject) {
         $memberProject->delete();
 
-        return redirect('projects');
+        return back();
     }
 }

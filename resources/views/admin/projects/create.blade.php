@@ -28,6 +28,12 @@
                 </div>
             </div>
 
+            @foreach ($users as $user)
+                <div>
+                    <input type="checkbox" name="member[]" id="member" value="{{ $user->id }}">
+                    <label for="member">{{ $user->name }}</label>
+                </div>
+            @endforeach
             
             <div class="mt-3 ">
                 <input type="submit" class="btn btn-primary" value="Submit">
