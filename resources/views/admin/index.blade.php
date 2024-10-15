@@ -13,7 +13,9 @@
     </div>
     <div class="card mt-4">
         <div class="card-body">
-
+            <a href="{{ route('send-mail') }}" class="btn btn-primary">Kirim email</a>
         </div>
     </div>
+    
+
 @endsection
