@@ -62,6 +62,7 @@ class ProjectController extends Controller
                 MemberProject::create([
                     'project_id'    => $project->id,
                     'user_id'       => $value,
+                    'role'          => 'test role'
                 ]);
             }
         }

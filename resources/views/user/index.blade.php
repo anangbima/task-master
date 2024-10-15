@@ -16,20 +16,29 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet ut, numquam expedita minus dolores enim itaque facere ratione at similique accusantium deserunt? Omnis, aliquid non. Officia quasi iusto accusamus itaque ipsa quia voluptates rem veniam dolore illum. Dolorem consequatur, itaque, aut minima voluptatum atque doloribus ratione nisi quos, voluptates temporibus!
         </div>
 
-        <div class="mt-4 row">
-            <div class="col-lg-2 col-sm-12">
-                Project
-            </div>
-            <div class="col-lg-10 col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h6>Lorem, ipsum.</h6>
+        <div class="mt-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Your Projects</h5>
 
-                        <div class="">
-                            
-                        </div>
-                    </div>
+                <div>
+                    <input type="text" placeholder="Search" class="form-control">
                 </div>
+            </div>
+
+            <div class="mt-3">
+                @forelse ($projects as $project)
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6>{{ $project->name }}</h6>
+                        </div>
+
+                        <a href="{{ url('/projects/'.$project->slug) }}" class="stretched-link"></a>
+                    </div>
+                @empty
+                    <div>
+                        No Project yet
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>    

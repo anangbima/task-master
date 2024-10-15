@@ -35,6 +35,14 @@ class Project extends Model
         ]);
     }
 
+    // Mengambil data project by user
+    public function scopeIsMember($query, $key) {
+        // return $query->where('user_id', $key);
+        return $query->whereHas('member', function ($query) use ($key) {
+            $query->where('user_id', $key);
+        });
+    }
+
     // Relasi dengan tabel task
     public function task () {
         return $this->hasMany(Task::class);

@@ -16,7 +16,8 @@ class MemberProjectController extends Controller
             // pindah modal
             MemberProject::create([
                 'user_id'       => $value,
-                'project_id'    => $request->project_id
+                'project_id'    => $request->project_id,
+                'role'          => 'test role'
             ]);
         }
 

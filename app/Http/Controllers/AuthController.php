@@ -39,7 +39,7 @@ class AuthController extends Controller
             } 
 
             if ($user['role'] == 'user') {
-                return redirect('user');
+                return redirect('/');
             }
         }
 

@@ -12,6 +12,7 @@ class MemberProject extends Model
     protected $fillable = [
         'project_id',
         'user_id',
+        'role',
     ];
 
     // Relasi dengan tabel user

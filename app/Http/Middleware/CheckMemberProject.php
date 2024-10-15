@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckMember
+class CheckMemberProject
 {
     /**
      * Handle an incoming request.
@@ -15,6 +16,11 @@ class CheckMember
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        $user = Auth::user();
+        if($request->project->member->contains('user_id', $user->id)){
+            return $next($request);
+        }
+
+        return back();
     }
 }

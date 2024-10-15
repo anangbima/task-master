@@ -51,11 +51,13 @@ Route::middleware(['auth'])->group( function () {
 
     // Route user
     Route::middleware(['role:user'])->group(function () {
-        Route::prefix('user')->group(function () {
-            Route::get('/', [UserUserController::class, 'index']);
-            // Route::get('projects', [UserProjectController::class, 'index']);
-        });
+        Route::get('/', [UserUserController::class, 'index'])->name('user-index');
+        Route::get('profile', [UserUserController::class, 'profile'])->name('user-profile');
+
+        Route::resource('projects', UserProjectController::class)->only('show')->parameters([
+            'projects'          => 'project:slug',
+        ])->middleware('memberProject');
     });
 });
 
-Route::get('/test', [UserUserController::class, 'index']);
+// Route::get('/test', [UserUserController::class, 'index']);
