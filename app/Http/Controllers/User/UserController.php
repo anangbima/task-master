@@ -15,7 +15,7 @@ class UserController extends Controller
         
         $data = [
             'title'     => 'Home',
-            'projects'  => Project::with('member.user', 'task.member.user', 'task.coment')->isMember($user->id)->get()
+            'projects'  => Project::with('member.user', 'task.member.user', 'task.coment')->hasMember($user->id)->get()
         ];
 
         return view('user.index', $data);

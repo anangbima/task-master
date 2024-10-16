@@ -12,8 +12,10 @@ class ProjectController extends Controller
     public function show(Project $project) {
         $data = [
             'title'     => $project->name,
-            'project'   => $project
+            'project'   => $project,
         ];
+
+        // dd($data['tasks']->toArray()); 
 
         return view('user.projects.show', $data);
     }

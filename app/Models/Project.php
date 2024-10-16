@@ -36,7 +36,7 @@ class Project extends Model
     }
 
     // Mengambil data project by user
-    public function scopeIsMember($query, $key) {
+    public function scopeHasMember($query, $key) {
         // return $query->where('user_id', $key);
         return $query->whereHas('member', function ($query) use ($key) {
             $query->where('user_id', $key);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('priority', ['High', 'Medium', 'Low']);
             $table->date('due_date');
             $table->time('due_hour');
-            $table->enum('status', ['Done', 'On going', 'Not Started']);
+            $table->enum('status', ['Done', 'In Progress', 'Not Started']);
             $table->timestamps();
         });
     }
