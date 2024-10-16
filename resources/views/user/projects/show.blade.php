@@ -73,7 +73,9 @@
                                                         <tr height="40px">
                                                             <td>Status</td>
                                                             <td>
-                                                                <span class="badge text-bg-warning">{{ $task->status }}</span>
+                                                                <span class="badge text-bg-warning">{{ $task->status }}
+                                                                    
+                                                                </span>
                                                             </td>
                                                         </tr>
                                                         <tr height="40px">
@@ -97,16 +99,16 @@
                                                             Member Involved
                                                         </div>
 
-                                                        <div class="mt-3">
+                                                        {{-- <div class="mt-3">
                                                             @foreach ($task->member as $member)
                                                                 <div class="d-flex gap-2 align-items-center mb-3">
                                                                     <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 32px; height: 32px"></img>
                                                                     <span>
-                                                                        {{ $member->user->name }}
+                                                                        {{ $member->id }}
                                                                     </span>
                                                                 </div>
                                                             @endforeach
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>

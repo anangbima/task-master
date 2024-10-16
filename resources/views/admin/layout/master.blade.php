@@ -176,6 +176,21 @@
             </div>
         </div>
 
+        <script>
+            $(document).ready(function () {
+    
+                $('#toggle-dark').on('change', function() {
+                    var theme = $('html').attr('data-bs-theme');
+                    
+                    if (theme == 'dark') {
+                        $('#modal-content-left').css("background-color", '#151521');
+                    } else{
+                        $('#modal-content-left').css("background-color", '#F2F7FF');   
+                    }
+                })
+            });
+        </script>
+
     <script src="{{ url('/assets/static/js/components/dark.js')}} "></script>
     <script src="{{ url('/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     

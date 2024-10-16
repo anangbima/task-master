@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController as AdminAdminController;
+use App\Http\Controllers\Admin\ComentController;
 use App\Http\Controllers\Admin\MemberProjectController as AdminMemberProjectController;
 use App\Http\Controllers\Admin\MemberTaskController as AdminMemberTaskController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
@@ -39,6 +40,10 @@ Route::middleware(['auth'])->group( function () {
             
             Route::resource('member-task', AdminMemberTaskController::class)->only([
                 'store', 'destroy'
+            ]);
+
+            Route::resource('coments', ComentController::class)->only([
+                'store'
             ]);
 
             Route::get('user', [AdminUserController::class, 'index'])->name('admin-user');
