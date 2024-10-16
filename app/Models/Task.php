@@ -14,6 +14,9 @@ class Task extends Model
         'description', 
         'deadline', 
         'status', 
+        'priority',
+        'due_date',
+        'due_hour',
         'project_id'
     ];
 
@@ -29,6 +32,6 @@ class Task extends Model
 
     // Relasi dengan tabel coment
     public function coment () {
-        return $this->hasMany(MemberTask::class);
+        return $this->hasMany(Coment::class);
     }
 }

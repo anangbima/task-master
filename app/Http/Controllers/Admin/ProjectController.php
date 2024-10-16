@@ -23,7 +23,7 @@ class ProjectController extends Controller
         $data = [
             'title'     => 'Projects',
             'page'      => 'projects',
-            'projects'  => Project::with('member.user', 'task')->get(), 
+            'projects'  => Project::with('member.user', 'task.member', 'task.coment')->get(), 
         ];
 
         return view('admin.projects.index', $data);

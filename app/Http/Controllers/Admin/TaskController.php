@@ -31,9 +31,11 @@ class TaskController extends Controller
         $task = Task::create([
             'title'         => $data['title'],
             'description'   => $data['description'],
-            'deadline'      => Carbon::now(), // temp
             'status'        => 'Not Started',
-            'project_id'    => '1', // statis
+            'priority'      => $data['priority'],
+            'due_date'      => $request->due_date, 
+            'due_hour'      => $request->due_hour ?? '00:00:00', 
+            'project_id'    => $request->project_id
         ]);
 
         if ($task && $request->member != null) {

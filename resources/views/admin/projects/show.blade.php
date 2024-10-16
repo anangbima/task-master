@@ -10,179 +10,17 @@
         <h5>Task</h5>
 
         <div >
-            <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create new</a>
+            {{-- <a href="{{ route('tasks.create') }}" class="btn btn-primary" >Create new</a> --}}
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTask">Create new</a>
         </div>
     </div> 
-
-    {{-- <section class="tasks">
-        <div class="card widget-todo">
-            <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                <h4 class="card-title d-flex">
-                    <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Tasks
-                </h4>
-                <ul class="list-inline d-flex mb-0">
-                    <li class="d-flex align-items-center">
-                        <i class="bx bx-check-circle font-medium-3 me-50"></i>
-                        <div class="dropdown">
-                            <div class="dropdown-toggle me-1" role="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Task
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Option 1</a>
-                                <a class="dropdown-item" href="#">Option 2</a>
-                                <a class="dropdown-item" href="#">Option 3</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="d-flex align-items-center">
-                        <i class="bx bx-sort me-50 font-medium-3"></i>
-                        <div class="dropdown">
-                            <div class="dropdown-toggle" role="button" id="dropdownMenuButton2"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Task
-                            </div>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="#">Option 1</a>
-                                <a class="dropdown-item" href="#">Option 2</a>
-                                <a class="dropdown-item" href="#">Option 3</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        
-            <div class="card-body px-0 py-1 overflow-auto">
-                <ul class="widget-todo-list-wrapper" id="widget-todo-list">
-                    <li class="widget-todo-item">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-1">
-                                </div>
-                                <label for="checkbox-1" class="widget-todo-title ms-2">Add SCSS and JS files if
-                                    required</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-success me-1">frontend</div>
-                                <div class="avatar bg-warning">
-                                    <img src="./assets/compiled/jpg/1.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="widget-todo-item">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-2">
-                                </div>
-                                <label for="checkbox-2" class="widget-todo-title ms-2">Check all the changes that you did,
-                                    before you commit</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-danger me-1">backend</div>
-                                <div class="avatar bg-warning">
-                                    <img src="./assets/compiled/jpg/2.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="widget-todo-item completed">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-3" checked>
-                                </div>
-                                <label for="checkbox-3" class="widget-todo-title ms-2">Dribble, Behance, UpLabs & Pinterest
-                                    Post</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-primary me-1">UI/UX</div>
-                                <div class="avatar bg-rgba-primary m-0 me-50">
-                                    <img src="./assets/compiled/jpg/3.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="widget-todo-item">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-4">
-                                </div>
-                                <label for="checkbox-4" class="widget-todo-title ms-2">Fresh Design Web & Responsive
-                                    Miracle</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-info me-1">Design</div>
-                                <div class="avatar bg-warning">
-                                    <img src="./assets/compiled/jpg/4.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="widget-todo-item">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-5">
-                                </div>
-                                <label for="checkbox-5" class="widget-todo-title ms-2">Add Calendar page and source and
-                                    credit page in
-                                    documentation</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-warning me-1">Javascript</div>
-                                <div class="avatar bg-warning">
-                                    <img src="./assets/compiled/jpg/5.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="widget-todo-item">
-                        <div
-                            class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                            <div class="widget-todo-title-area d-flex align-items-center gap-2">
-                                <i data-feather="list" class="cursor-move"></i>
-                                <div class="checkbox checkbox-shadow">
-                                    <input type="checkbox" class="form-check-input" id="checkbox-6">
-                                </div>
-                                <label for="checkbox-6" class="widget-todo-title ms-2">Add Angular Starter-kit</label>
-                            </div>
-                            <div class="widget-todo-item-action d-flex align-items-center">
-                                <div class="badge badge-pill bg-light-primary me-1">UI/UX</div>
-                                <div class="avatar bg-warning">
-                                    <img src="./assets/compiled/jpg/1.jpg" alt="" srcset="">
-                                </div>
-                                <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section> --}}
 
     <div class="row">
         @forelse ($project->task as $task)
             <div class="col-lg-4 col-sm-12 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h6>{{ $task->title }}</h6>
+                        <h5>{{ $task->title }}</h5>
 
                         <div class="progress progress-sm mt-3" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-success" style="width: 25%"></div>
@@ -210,14 +48,14 @@
                             </div>
                         </div>
 
-                        <div class="d-flex mt-3 gap-2">
+                        {{-- <div class="d-flex mt-3 gap-2">
                             <a class="btn btn-success btn-sm" href="{{ route('tasks.edit', $task) }}" style="z-index: 2;">Edit</a>
                             <form style="z-index: 2;" action="{{ route('tasks.destroy', $task) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>   
             </div>
@@ -311,6 +149,105 @@
                     </div>
                 </div>
             @endforelse
+        </div>
+    </div>
+
+    {{-- Modal tambah task --}}
+    <div class="modal fade text-left modal-borderless" id="createTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create new task</h5>
+                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+
+                <form action="{{ route('tasks.store') }}" method="POST">
+                    @csrf
+
+                    <div class="modal-body">
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        <div class="mb-3">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('title')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="priority">Priority</label>
+                            <select name="priority" id="priority" class="form-select @error('priority') is-invalid @enderror">
+                                <option value=""></option>
+                                <option value="High">High</option>
+                                <option value="High">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('priority')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-lg-6 col-sm-12">
+                                <label for="due_date">Due Date</label>
+                                <input type="date" id="due_date" name="due_date" class="form-control @error('due_date') is-invalid @enderror" value="{{ old('due_date') }}">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('due_date')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <label for="due_hour">Due Hour</label>
+                                <input type="time" id="due_hour" name="due_hour" class="form-control @error('due_hour') is-invalid @enderror" value="{{ old('due_hour') }}">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('due_hour')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editor">Description</label>
+                            <textarea id="editor" name="description" class="form-control @error('description') is-invalid @enderror">{!! old('description') !!}</textarea>
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('description')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+
+                        @foreach ($users as $user)
+                            <div>
+                                <input type="checkbox" name="member[]" id="member" value="{{ $user->id }}">
+                                <label for="member">{{ $user->name }}</label>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <div class="modal-footer" style="margin-top: -10px">
+                        <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

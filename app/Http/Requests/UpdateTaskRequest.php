@@ -24,6 +24,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'title'         => 'required',
             'description'   => 'required',
+            'priority'      => 'required',
         ];
     }
 }

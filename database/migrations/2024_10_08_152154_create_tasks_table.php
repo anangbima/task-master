@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('priority', ['High', 'Medium', 'Low']);
-            $table->dateTime('deadline');
+            $table->date('due_date');
+            $table->time('due_hour');
             $table->enum('status', ['Done', 'On going', 'Not Started']);
             $table->timestamps();
         });

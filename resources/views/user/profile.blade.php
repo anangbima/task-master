@@ -125,6 +125,7 @@
         </div>
     </div>
 
+    {{-- Modal update foto --}}
     <div class="modal fade text-left modal-borderless" id="updateImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
