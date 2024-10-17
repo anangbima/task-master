@@ -27,10 +27,10 @@
 
             <div class="mt-3 row">
                 @forelse ($projects as $project)
-                    <div class="col-lg-6 col-sm-12 mb-3">
+                    <div class="col-lg-6 col-sm-12 mb-2">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h6>{{ $project->name }}</h6>
+                                <h5>{{ $project->name }}</h5>
     
                                 <div class="mt-4 d-flex align-items-center justify-content-between">
                                     <div>
@@ -50,11 +50,6 @@
     
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center gap-3">
-                                        {{-- <div class="bg-primary fw-small px-3 py-1 rounded-pill">
-                                            <i class="bi bi-calendar2"></i> 12 Maret 2025
-                                        </div> --}}
-    
-                                        {{-- <span class="badge rounded-pill text-bg-primary"><i class="bi bi-calendar2"></i> 12 Maret 2025</span> --}}
     
                                         <div>
                                             Tasks ({{ $project->statusTasks('Done')['count'] }}/{{ count($project->task) }})
