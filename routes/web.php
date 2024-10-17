@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group( function () {
             Route::get('profile', [AdminAdminController::class, 'profile'])->name('admin-profile');
 
             Route::get('send/mail', [MailController::class, 'sendMail'])->name('send-mail');
+
+            Route::post('update-status-task', [AdminTaskController::class, 'updateStatus'])->name('admin-update-status-task');
         });
     });
 

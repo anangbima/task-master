@@ -21,7 +21,7 @@
                         aria-selected="false">Timeline</a>
                     <a class="nav-link" id="v-pills-other-tab" data-bs-toggle="pill"
                         href="#v-pills-other" role="tab" aria-controls="v-pills-other"
-                        aria-selected="false">Other</a>
+                        aria-selected="false">Member</a>
                     <a class="nav-link" id="v-pills-setting-tab" data-bs-toggle="pill"
                         href="#v-pills-setting" role="tab" aria-controls="v-pills-setting"
                         aria-selected="false">Setting</a>
@@ -90,13 +90,13 @@
                             <div class="card-body">
                                 <div class="progress-stacked" >
                                     <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Done')['percent'] }}%">
-                                        <div class="progress-bar bg-success">{{ $project->statusTasks('Done')['percent'] }}%</div>
+                                        <div class="progress-bar bg-success">{{ intVal($project->statusTasks('Done')['percent']) }}%</div>
                                     </div>
                                     <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('In Progress')['percent'] }}%">
-                                        <div class="progress-bar bg-warning">{{ $project->statusTasks('In Progress')['percent'] }}%</div>
+                                        <div class="progress-bar bg-warning">{{ intVal($project->statusTasks('In Progress')['percent']) }}%</div>
                                     </div>
                                     <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Not Started')['percent'] }}%">
-                                        <div class="progress-bar bg-danger">{{ $project->statusTasks('Not Started')['percent'] }}%</div>
+                                        <div class="progress-bar bg-danger">{{ intVal($project->statusTasks('Not Started')['percent']) }}%</div>
                                     </div>
                                 </div>
 
@@ -250,20 +250,15 @@
                     <div class="tab-pane fade" id="v-pills-other" role="tabpanel"
                         aria-labelledby="v-pills-other-tab">
                         <div class="px-lg-5 px-sm-0">
-                            <div class="mb-5">
-                                <h5>Other Information</h5>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5>Member</h5>
+
+                                <div>
+                                    <a href="#" class="btn btn-primary" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#addMember">Add</a>
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <div class="fw-bold">Created at</div>
-                                <div>{{ $project->created_at }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="fw-bold">Updated at</div>
-                                <div>{{ $project->updated_at }}</div>
-                            </div>
-
-                            <div class="card mt-5">
+                            <div class="card mt-3">
                                 <div class="p-2">
                                     <table class="table table-borderless">
                                         <thead>
@@ -302,10 +297,33 @@
                     <div class="tab-pane fade" id="v-pills-setting" role="tabpanel"
                         aria-labelledby="v-pills-setting-tab">
                         <div class="px-lg-5 px-sm-0">
-                            <div class="mb-5">
+                            <div class="mb-3">
                                 <h5>Setting</h5>
                             </div>
 
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>Udate some project data</div>
+
+                                        <div>
+                                            <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-danger">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>Delete this project</div>
+
+                                        <div>
+                                            <a id="btn-delete" data-project="{{ $project }}" href="#" class="btn btn-outline-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -545,14 +563,14 @@
                             </div>
                         @endforeach --}}
 
-                        {{-- <div class="form-group">
+                        <div class="form-group" style="z-index: 2;">
                             <label for="member">Member</label>
                             <select class="choices form-select multiple-remove" id="member" name="member[]" multiple="multiple">
                                 @foreach ($project->member as $member)
-                                    <option value="{{ $member->$user->id }}">{{ $member->$user->name }}</option>
+                                    <option value="{{ $member->user->id }}">{{ $member->user->name }}</option>
                                 @endforeach
                             </select>
-                        </div> --}}
+                        </div>
 
                     </div>
 
@@ -667,6 +685,43 @@
         </div>
     </div>
 
+    {{-- Modal modal add member --}}
+    <div class="modal fade text-left modal-borderless" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Member</h5>
+                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+
+                <form action="{{ route('member-project.store') }}" method="POST">
+                    @csrf
+
+                    <div class="modal-body">
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        @foreach ($users as $user)
+                            <div>
+                                <input type="checkbox" name="user_id[]" id="member" value="{{ $user->id }}">
+                                <label for="member">{{ $user->name }}</label>
+                            </div>
+                        @endforeach
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     {{-- proses untuk mengambil pesan succes --}}
     @if (session()->get('success'))
         <div class="swal-success" data-swal="{{session()->get('success')}}"></div>
@@ -703,6 +758,7 @@
                 var taskComentJson = $.parseJSON(taskComent);
                 
                 $('#title-view').html(taskJson.title);
+                $('#task-id').val(taskJson.id);
                 $('#description-view').html(taskJson.description);
                 $('#status-view').html(showStatus(taskJson.status));
                 $('#priority-view').html(showPriority(taskJson.priority));
@@ -812,7 +868,7 @@
                     icon: "question",
                     title: "Update Status Task",
                     showConfirmButton: false,
-                    html: '<form action="{{ route("update-status-task") }}" method="post">'+
+                    html: '<form action="{{ route("admin-update-status-task") }}" method="post">'+
                             '@csrf'+
                             '<div>Are you sure want to update status task ?</div>'+
                             '<input type="hidden" name="id" value="'+id+'">'+
@@ -823,6 +879,25 @@
             })
         });
     </script>
+
+<script>
+    $(document).on("click", "#btn-delete", function() {
+        var project = $(this).attr('data-project');
+        var projectJson = $.parseJSON(project);
+        
+        Swal2.fire({
+            icon: "question",
+            title: "Delete Project ?",
+            showConfirmButton: false,
+            html: '<form action="{{ url("admin/projects/") }}/'+projectJson.slug+'" method="post">'+
+                    '@method("DELETE")'+
+                    '@csrf'+
+                    '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
+                '</form>'
+        })
+
+    });
+</script>
 
     {{-- <script>
         $(document).ready(function () {

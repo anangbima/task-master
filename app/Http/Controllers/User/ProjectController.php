@@ -15,8 +15,6 @@ class ProjectController extends Controller
             'project'   => $project,
         ];
 
-        // dd($data['tasks']->toArray()); 
-
         return view('user.projects.show', $data);
     }
 }

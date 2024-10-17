@@ -95,13 +95,13 @@
                             <div class="card-body">
                                 <div class="progress-stacked" >
                                     <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Done')['percent'] }}%">
-                                        <div class="progress-bar bg-success">{{ $project->statusTasks('Done')['percent'] }}%</div>
+                                        <div class="progress-bar bg-success">{{ intVal($project->statusTasks('Done')['percent']) }}%</div>
                                     </div>
                                     <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('In Progress')['percent'] }}%">
-                                        <div class="progress-bar bg-warning">{{ $project->statusTasks('In Progress')['percent'] }}%</div>
+                                        <div class="progress-bar bg-warning">{{ intVal($project->statusTasks('In Progress')['percent']) }}%</div>
                                     </div>
                                     <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Not Started')['percent'] }}%">
-                                        <div class="progress-bar bg-danger">{{ $project->statusTasks('Not Started')['percent'] }}%</div>
+                                        <div class="progress-bar bg-danger">{{ intVal($project->statusTasks('Not Started')['percent']) }}%</div>
                                     </div>
                                 </div>
 

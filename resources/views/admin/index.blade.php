@@ -4,7 +4,7 @@
 
     <div class="container">
         <div>
-            Senin, 1 Januari 2021
+            {{ now()->format('d F Y') }}
         </div>
         <div>
             <h1>Welcome back, {{ auth()->user()->name }}</h1>
