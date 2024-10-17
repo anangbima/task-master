@@ -69,15 +69,12 @@
 
 <script>
     $(document).on("click", "#btn-delete", function() {
-        console.log('hahah');
-
         var project = $(this).attr('data-project');
         
         Swal2.fire({
             icon: "question",
             title: "Delete Project ?",
             showConfirmButton: false,
-            // showCloseButton: true,
             html: '<form action="{{ route('projects.destroy', 'project') }}" method="post">'+
                     '@method('DELETE')'+
                     '@csrf'+

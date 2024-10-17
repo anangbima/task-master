@@ -38,13 +38,13 @@
                                     </div>
     
                                     <div>
-                                        {{ $project->doneTasks()['percent'] }} %
+                                        {{ $project->statusTasks('Done')['percent'] }} %
                                     </div>
                                 </div>
     
                                 <div class="mt-2">
                                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 6px">
-                                        <div class="progress-bar bg-success " style="width: {{ $project->doneTasks()['percent'] }}%"></div>
+                                        <div class="progress-bar bg-success " style="width: {{ $project->statusTasks('Done')['percent'] }}%"></div>
                                     </div>
                                 </div>
     
@@ -54,10 +54,10 @@
                                             <i class="bi bi-calendar2"></i> 12 Maret 2025
                                         </div> --}}
     
-                                        <span class="badge rounded-pill text-bg-primary"><i class="bi bi-calendar2"></i> 12 Maret 2025</span>
+                                        {{-- <span class="badge rounded-pill text-bg-primary"><i class="bi bi-calendar2"></i> 12 Maret 2025</span> --}}
     
                                         <div>
-                                            Tasks ({{ $project->doneTasks()['done'] }}/{{ count($project->task) }})
+                                            Tasks ({{ $project->statusTasks('Done')['count'] }}/{{ count($project->task) }})
                                         </div>
                                     </div>
     

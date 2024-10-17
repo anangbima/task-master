@@ -36,20 +36,20 @@ class Project extends Model
     }
     
     // Mendapatkan percent dari total task selesai
-    public function doneTasks() {
+    public function statusTasks($status) {
         $totalTasks = $this->task()->count();
-        $doneTasks = $this->task()->where('status', 'Done')->count();
+        $countStatusTasks = $this->task()->where('status', $status)->count();
 
         if ($totalTasks === 0) {
             return [
-                'done'  => $doneTasks,
+                'count'  => $countStatusTasks,
                 'percent' => 0
             ];
         }
 
         return [
-            'done'  => $doneTasks,
-            'percent' => ($doneTasks / $totalTasks) * 100
+            'count'  => $countStatusTasks,
+            'percent' => ($countStatusTasks / $totalTasks) * 100
         ];
     }
 

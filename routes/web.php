@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group( function () {
             'projects'          => 'project:slug',
         ])->middleware('isMemberProject');
 
-        Route::post('update-status-task/{status}/{id}', [UserTaskController::class, 'updateStatusTask'])->name('update-status-task');
+        Route::post('update-status-task', [UserTaskController::class, 'updateStatus'])->name('update-status-task')->middleware('isMemberTask');
     });
 });
 

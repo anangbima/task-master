@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     // update status of the task
-    public function updateStatus($status, $id) {
-        $task = Task::find($id);
+    public function updateStatus(Request $request) {
+        $task = Task::find($request->id);
         $task->update([
-            'status'    => $status
+            'status'    => $request->status
         ]);
 
         session()->flash('success', 'Successfully update status');

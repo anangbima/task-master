@@ -52,20 +52,80 @@
                     <div class="tab-pane fade" id="v-pills-summary" role="tabpanel"
                         aria-labelledby="v-pills-summary-tab">
 
-                        <div class="mb-3">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum cum voluptatum inventore impedit aliquam et deserunt doloribus architecto adipisci nulla commodi sint, omnis corrupti vel sequi quidem quasi delectus pariatur. Veritatis doloribus ab recusandae, enim cumque minus iusto error odio consequuntur eveniet nam adipisci nulla atque quis, nobis impedit natus!
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="d-flex gap-4 align-items-center">
+                                            <div class="">
+                                                <div class="stats-icon red mb-2 position-relative">
+                                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                                        <i class="bi bi-list-task"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <h6 class="text-muted font-semibold">Total Task</h6>
+                                                <h4 class="font-extrabold mb-0">{{ count($project->task) }}</h4>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="d-flex gap-4 align-items-center">
+                                            <div class="">
+                                                <div class="stats-icon purple mb-2">
+                                                    <i class="iconly-boldProfile"></i>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <h6 class="text-muted font-semibold">Member</h6>
+                                                <h4 class="font-extrabold mb-0">{{ count($project->member) }}</h4>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="mb-3">
-                            <div class="progress-stacked">
-                                <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
-                                    <div class="progress-bar"></div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="progress-stacked" >
+                                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Done')['percent'] }}%">
+                                        <div class="progress-bar bg-success">{{ $project->statusTasks('Done')['percent'] }}%</div>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('In Progress')['percent'] }}%">
+                                        <div class="progress-bar bg-warning">{{ $project->statusTasks('In Progress')['percent'] }}%</div>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->statusTasks('Not Started')['percent'] }}%">
+                                        <div class="progress-bar bg-danger">{{ $project->statusTasks('Not Started')['percent'] }}%</div>
+                                    </div>
                                 </div>
-                                <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                                    <div class="progress-bar bg-success"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                    <div class="progress-bar bg-info"></div>
+
+                                <div class="mt-3 d-flex gap-3">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <div class="bg-success rounded-circle" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            Done
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <div class="bg-warning rounded-circle" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            In Progress
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <div class="bg-danger rounded-circle" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            Not Started
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +146,83 @@
                             @forelse ($project->task as $task)
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <span class="fw-bold">{{ $task->title }}</span>
-            
+                                        <div class="row align-items-center">
+                                            <div class="col-3">
+                                                <div class="fw-bold">{{ ucfirst($task->title) }}</div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="d-flex gap-2 mt-1">
+                                                    <span class="badge rounded text-bg-secondary">
+                                                        {{ $task->due_date }}
+                                                        {{ $task->due_hour }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                @if ($task->priority == 'High')
+                                                    <div class="badge text-bg-danger">
+                                                        {{ $task->priority }}
+                                                    </div>
+                                                @endif
+                                                @if ($task->priority == 'Medium')
+                                                    <div class="badge text-bg-warning">
+                                                        {{ $task->priority }}
+                                                    </div>
+                                                @endif
+                                                @if ($task->priority == 'Low')
+                                                    <div class="badge text-bg-success">
+                                                        {{ $task->priority }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-2">
+                                                <div>
+                                                    @if ($task->status == 'Not Started')
+                                                        <div class="dropend" id="dropdown-status" style="z-index: 2;">
+                                                            <div class="badge text-bg-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                {{ $task->status }}
+                                                            </div>
+                                                            <ul class="dropdown-menu" >
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="In Progress">In Progress</a></li>
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="Done">Done</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+
+                                                    @if ($task->status == 'In Progress')
+                                                        <div class="dropend" id="dropdown-status" style="z-index: 2;">
+                                                            <div class="badge text-bg-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                {{ $task->status }}
+                                                            </div>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="Not Started">Not Started</a></li>
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="Done">Done</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+
+                                                    @if ($task->status == 'Done')
+                                                        <div class="dropend" id="dropdown-status" style="z-index: 2;" >
+                                                            <div class="badge text-bg-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                {{ $task->status }}
+                                                            </div>
+                                                            <ul class="dropdown-menu" >
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="Not Started">Not Started</a></li>
+                                                                <li><a href="#" class="dropdown-item" id="btn-update-status" value-id="{{ $task->id }}" status-value="In Progress">In Progress</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                @foreach ($task->member as $member)
+                                                    <div class="avatar bg-warning" style="width: 26px; height: 26px; margin-left: -10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">
+                                                        {{ $member->user->imagePicture }}
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                         <a 
                                             href="#" 
                                             class="stretched-link" 
@@ -135,7 +270,7 @@
 
                             <div class="card mt-5">
                                 <div class="p-2">
-                                    <table class="table">
+                                    <table class="table table-borderless">
                                         <thead>
                                             <tr>
                                                 <th>User</th>
@@ -189,53 +324,6 @@
             </div>
         </div>
     </div>
-
-    {{-- versi lama --}}
-    {{-- <div class="container mt-5">
-        <div>
-            <h5>{{ $project->name }}</h5>
-        </div>
-
-        <div class="mt-4">
-            {!! $project->description !!}
-        </div>
-
-        <div class="mt-5">
-            <div class="d-flex justify-content-between align-items-center">
-                <h6>Tasks</h6>
-
-                <div class="">
-                    <input type="text" placeholder="Search" class="form-control">
-                </div>
-            </div>
-
-            <div id="data-view" class="mt-3">
-                @forelse ($project->task as $task)
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <span class="fw-bold">{{ $task->title }}</span>
-
-                            <a 
-                                href="#" 
-                                class="stretched-link" 
-                                id="btn-detail-task" 
-                                data-task="{{ $task }}" 
-                                data-member="{{ $task->member->map(fn($q) => collect([ 'user' => $q->user, 'member' => $q])) }}"
-                                data-coment="{{ $task->coment }}"
-                            ></a>
-                        </div>
-                    </div>
-                @empty
-                    <div class="w-100 position-relative" style="min-height: 500px">
-                        <div class="position-absolute top-50 start-50 translate-middle text-center">
-                            <h5>No Tasks</h5>
-                            <div>There is no task available on this list yet.</div>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-    </div> --}}
 
     {{-- Modal detail task --}}
     <div class="modal fade text-left modal-borderless" id="detailTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -319,6 +407,47 @@
         </div>
     </div>
 
+    {{-- proses untuk mengambil pesan succes --}}
+    @if (session()->get('success'))
+        <div class="swal-success" data-swal="{{session()->get('success')}}"></div>
+    @endif
+
+    @if (session()->get('error'))
+        <div class="swal-error" data-swal="{{session()->get('error')}}"></div>
+    @endif
+
+    <script>
+        $(document).ready(function(){
+
+            const swalSuccess = $('.swal-success').data('swal');
+            const swalError = $('.swal-error').data('swal');
+            const message = $('.swal-success').attr('data-swal');
+            const messageError = $('.swal-error').attr('data-swal');
+
+            if(swalSuccess){
+
+                Swal2.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+            
+            if(swalError){
+
+                Swal2.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: messageError,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             $('#data-view').on('click', '#btn-detail-task', function() {
@@ -346,38 +475,21 @@
             function showStatus(status) {
                 var htmlStatus = '';
                 var statusColor = '';
-                var statusValue = [];
 
                 if (status == 'Not Started') {
                     statusColor = 'text-bg-danger';
-                    statusValue = [
-                        'In Progress',
-                        'Done',
-                    ]
                 }
                 if (status == 'In Progress') {
                     statusColor = 'text-bg-warning';
-                    statusValue = [
-                        'Not Started',
-                        'Done',
-                    ]
                 }
                 if (status == 'Done') {
                     statusColor = 'text-bg-success';
-                    statusValue = [
-                        'In Progress',
-                        'Not Started',
-                    ]
                 }
 
-                htmlStatus = '<div class="dropdown">'
-                                    + '<div class="badge '+ statusColor +' dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">'
-                                    + status 
-                                    + '</div>'
-                                    + '<ul class="dropdown-menu" id="dropdown-status">'
-                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[0]+'">'+statusValue[0]+'</a></li>'
-                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[1]+'">'+statusValue[1]+'</a></li>'
-                                    + '</ul>'
+                htmlStatus = '<div class="badge '+ statusColor +'">'
+                                + status 
+                                + '</div>'
+                                    
 
                 return htmlStatus
             }
@@ -447,11 +559,28 @@
             }
             
             // click update status task
-            // $('#status-view').on('click', '.dropdown-item',function(e) {
-            //     var status = $(this).attr('status-value');
+            $(document).on('click', '#btn-update-status',function() {
+                var status = $(this).attr('status-value');
+                var id = $(this).attr('value-id');
                 
-            // })
+                console.log(id);
+                
+                Swal2.fire({
+                    icon: "question",
+                    title: "Update Status Task",
+                    showConfirmButton: false,
+                    html: '<form action="{{ route("update-status-task") }}" method="post">'+
+                            '@csrf'+
+                            '<div>Are you sure want to update status task ?</div>'+
+                            '<input type="hidden" name="id" value="'+id+'">'+
+                            '<input type="hidden" name="status" value="'+status+'">'+
+                            '<button type="submit" class="btn btn-primary text-white mt-4 p-2 px-4">Yes</button>'+
+                        '</form>'
+                })
+            })
         });
     </script>
+
+    <input type="hidden" name="id" value="">
 
 @endsection
