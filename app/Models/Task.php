@@ -20,6 +20,10 @@ class Task extends Model
         'project_id'
     ];
 
+    public function scopeTaskStatus($query, $key){
+        return $query->where('status', $key);
+    }
+
     // Relasi dengan tabel project
     public function project () {
         return $this->belongsTo(Project::class);

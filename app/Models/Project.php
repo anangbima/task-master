@@ -34,6 +34,24 @@ class Project extends Model
             'description'   => $data['description'],
         ]);
     }
+    
+    // Mendapatkan percent dari total task selesai
+    public function doneTasks() {
+        $totalTasks = $this->task()->count();
+        $doneTasks = $this->task()->where('status', 'Done')->count();
+
+        if ($totalTasks === 0) {
+            return [
+                'done'  => $doneTasks,
+                'percent' => 0
+            ];
+        }
+
+        return [
+            'done'  => $doneTasks,
+            'percent' => ($doneTasks / $totalTasks) * 100
+        ];
+    }
 
     // Mengambil data project by user
     public function scopeHasMember($query, $key) {

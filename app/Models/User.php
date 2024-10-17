@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\HtmlString;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'image',
     ];
 
     /**
@@ -57,6 +59,16 @@ class User extends Authenticatable
 
         return $initials;
     }
+
+    public function getImagePictureAttribute() {
+
+        if ($this->image == '') {
+            return new HtmlString('<span class="avatar-content">'.$this->initials.'</span>');
+        }
+
+        return new HtmlString('<img src="'.url('/user/'.$this->image).'" class="w-100 h-100"></img>');
+    }
+
 
     // relasi dengan tabel member project
     public function memberProject () {

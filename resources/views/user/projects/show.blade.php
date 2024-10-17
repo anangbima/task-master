@@ -2,7 +2,196 @@
 
 @section('content')
 
-    <div class="container mt-5">
+    {{-- versi baru --}}
+    <div class=" mt-5" style="padding-left: 220px; padding-right: 220px">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Project</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $project->name }}</li>
+            </ol>
+        </nav>
+        
+        <div class="row">
+            <div class="col-2">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-about-tab" data-bs-toggle="pill"
+                        href="#v-pills-about" role="tab" aria-controls="v-pills-about"
+                        aria-selected="true">About</a>
+                    <a class="nav-link" id="v-pills-summary-tab" data-bs-toggle="pill"
+                        href="#v-pills-summary" role="tab" aria-controls="v-pills-summary"
+                        aria-selected="false">Summary</a>
+                    <a class="nav-link" id="v-pills-tasks-tab" data-bs-toggle="pill"
+                        href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks"
+                        aria-selected="false">Tasks</a>
+                    <a class="nav-link" id="v-pills-timeline-tab" data-bs-toggle="pill"
+                        href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline"
+                        aria-selected="false">Timeline</a>
+                    <a class="nav-link" id="v-pills-other-tab" data-bs-toggle="pill"
+                        href="#v-pills-other" role="tab" aria-controls="v-pills-other"
+                        aria-selected="false">Other</a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-about" role="tabpanel"
+                        aria-labelledby="v-pills-about-tab">
+
+                        <div class="px-lg-5 px-sm-0">
+                            <h2>{{ $project->name }}</h2>
+                            <div class="fw-light" style="font-size: 14px">
+                                Created by. Admin
+                            </div>
+
+                            <div class="mt-4">
+                                {!! $project->description !!}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-summary" role="tabpanel"
+                        aria-labelledby="v-pills-summary-tab">
+
+                        <div class="mb-3">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum cum voluptatum inventore impedit aliquam et deserunt doloribus architecto adipisci nulla commodi sint, omnis corrupti vel sequi quidem quasi delectus pariatur. Veritatis doloribus ab recusandae, enim cumque minus iusto error odio consequuntur eveniet nam adipisci nulla atque quis, nobis impedit natus!
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="progress-stacked">
+                                <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                                    <div class="progress-bar bg-success"></div>
+                                </div>
+                                <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                    <div class="progress-bar bg-info"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-tasks" role="tabpanel"
+                        aria-labelledby="v-pills-tasks-tab">
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Tasks</h6>
+            
+                            <div class="">
+                                <input type="text" placeholder="Search" class="form-control">
+                            </div>
+                        </div>
+
+                        <div id="data-view" class="mt-3">
+                            @forelse ($project->task as $task)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <span class="fw-bold">{{ $task->title }}</span>
+            
+                                        <a 
+                                            href="#" 
+                                            class="stretched-link" 
+                                            id="btn-detail-task" 
+                                            data-task="{{ $task }}" 
+                                            data-member="{{ $task->member->map(fn($q) => collect([ 'user' => $q->user, 'member' => $q])) }}"
+                                            data-coment="{{ $task->coment }}"
+                                        ></a>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="w-100 position-relative" style="min-height: 500px">
+                                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                        <h5>No Tasks</h5>
+                                        <div>There is no task available on this list yet.</div>
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-timeline" role="tabpanel"
+                        aria-labelledby="v-pills-timeline-tab">
+                        Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce
+                        non sapien sit amet magna dapibus
+                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a
+                        mauris ex. Ut finibus risus sed massa
+                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies.
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-other" role="tabpanel"
+                        aria-labelledby="v-pills-other-tab">
+                        <div class="px-lg-5 px-sm-0">
+                            <div class="mb-5">
+                                <h5>Other Information</h5>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="fw-bold">Created at</div>
+                                <div>{{ $project->created_at }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="fw-bold">Updated at</div>
+                                <div>{{ $project->updated_at }}</div>
+                            </div>
+
+                            <div class="card mt-5">
+                                <div class="p-2">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th class="text-end">Added at</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($project->member as $member)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center gap-3">
+                                                            <div class="avatar bg-warning ms-2" style="width: 30px; height: 30px">
+                                                                {{ $member->user->imagePicture }}
+                                                            </div>
+                                                            <div class="fw-bold">
+                                                                {{ $member->user->name }} <span class="fw-normal">{{ $member->user->name == auth()->user()->name ? '(You)' : '' }}</span>
+                                                                <div>{{ $member->user->email }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <div class="fw-light">
+                                                            {{ $member->user->created_at }}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h6>Member</h6>
+
+                <div class="mt-3">
+                    @foreach ($project->member as $member)
+                        <div class="mb-2 d-flex align-items-center gap-2">
+                            <div class="avatar bg-warning ms-2" style="width: 30px; height: 30px">
+                                {{ $member->user->imagePicture }}
+                            </div>
+                            <div class="fw-bold">
+                                {{ $member->user->name }} <span class="fw-normal">{{ $member->user->name == auth()->user()->name ? '(You)' : '' }}</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- versi lama --}}
+    {{-- <div class="container mt-5">
         <div>
             <h5>{{ $project->name }}</h5>
         </div>
@@ -46,7 +235,7 @@
                 @endforelse
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Modal detail task --}}
     <div class="modal fade text-left modal-borderless" id="detailTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">

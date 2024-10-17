@@ -17,11 +17,18 @@
                         <div class="position-relative w-100 h-50">
                             <div class="position-absolute top-50 start-50 translate-middle">
                                 <div class="avatar bg-warning" style="width: 140px; height: 140px;">
-                                    <div class="position-relative w-100">
-                                        <div class="position-absolute top-50 start-50 translate-middle">
-                                            <span class="avatar-content fw-bold" style="font-size: 52px;">{{ auth()->user()->initials }}</span>
+                                    @if (auth()->user()->image == '')
+                                        <div class="position-relative w-100">
+                                            <div class="position-absolute top-50 start-50 translate-middle">
+                                                <div>
+                                                    <span class="avatar-content fw-bold" style="font-size: 52px;">{{ auth()->user()->initials }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <img src="{{ url('/user/'.auth()->user()->image) }}" alt="" class="w-100 h-100">
+                                    @endif
+                                    
                                 </div>
                             </div>
                             <div class="">

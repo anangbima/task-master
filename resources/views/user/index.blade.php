@@ -38,13 +38,13 @@
                                     </div>
     
                                     <div>
-                                        25%
+                                        {{ $project->doneTasks()['percent'] }} %
                                     </div>
                                 </div>
     
                                 <div class="mt-2">
                                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 6px">
-                                        <div class="progress-bar bg-success " style="width: 25%"></div>
+                                        <div class="progress-bar bg-success " style="width: {{ $project->doneTasks()['percent'] }}%"></div>
                                     </div>
                                 </div>
     
@@ -57,16 +57,16 @@
                                         <span class="badge rounded-pill text-bg-primary"><i class="bi bi-calendar2"></i> 12 Maret 2025</span>
     
                                         <div>
-                                            Tasks (2/10)
+                                            Tasks ({{ $project->doneTasks()['done'] }}/{{ count($project->task) }})
                                         </div>
                                     </div>
     
                                     <div>
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle shadow-lg" style="width: 24px; height: 24px; margin-left: -10px"></img>
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle shadow-lg" style="width: 24px; height: 24px; margin-left: -10px"></img>
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle shadow-lg" style="width: 24px; height: 24px; margin-left: -10px"></img>
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle shadow-lg" style="width: 24px; height: 24px; margin-left: -10px"></img>
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle shadow-lg" style="width: 24px; height: 24px; margin-left: -10px"></img>
+                                        @foreach ($project->member as $member)
+                                            <div class="avatar bg-warning" style="width: 26px; height: 26px; margin-left: -10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">
+                                                {{ $member->user->imagePicture }}
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
