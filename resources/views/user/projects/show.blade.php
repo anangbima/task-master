@@ -75,14 +75,6 @@
                                 <div id="coment-view">
 
                                 </div>
-                                {{-- <div style="font-size: 14px" class="fw-bold">
-                                    Admin, 20 Januari 2021
-                                </div>
-                                <div class="card">
-                                    <div class="card-body p-3">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore voluptas totam accusamus perspiciatis necessitatibus eaque eius optio maiores ullam corporis?
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -100,8 +92,6 @@
                                     <td >
                                         <div id="status-view">
                                             Status task
-
-
                                         </div>
                                     </td>
                                 </tr>
@@ -132,16 +122,6 @@
                                 <div class="mt-3" id="member-view">
 
                                 </div>
-                                {{-- <div class="mt-3">
-                                    @foreach ($task->member as $member)
-                                        <div class="d-flex gap-2 align-items-center mb-3">
-                                            <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 32px; height: 32px"></img>
-                                            <span>
-                                                {{ $member->id }}
-                                            </span>
-                                        </div>
-                                    @endforeach
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -206,8 +186,8 @@
                                     + status 
                                     + '</div>'
                                     + '<ul class="dropdown-menu" id="dropdown-status">'
-                                    +   '<li><a class="dropdown-item" id="btn-update-status" status-value="'+statusValue[0]+'" href="#">'+statusValue[0]+'</a></li>'
-                                    +   '<li><a class="dropdown-item" id="btn-update-status" status-value="'+statusValue[1]+'" href="#">'+statusValue[1]+'</a></li>'
+                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[0]+'">'+statusValue[0]+'</a></li>'
+                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[1]+'">'+statusValue[1]+'</a></li>'
                                     + '</ul>'
 
                 return htmlStatus
@@ -276,6 +256,12 @@
 
                 $('#member-view').html(htmlMember);
             }
+            
+            // click update status task
+            // $('#status-view').on('click', '.dropdown-item',function(e) {
+            //     var status = $(this).attr('status-value');
+                
+            // })
         });
     </script>
 

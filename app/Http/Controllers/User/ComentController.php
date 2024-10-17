@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ComentController extends Controller
 {
-    //
+    // update status of the task
+    // public function updateStatus(Request $request) {
+    //     dd($status);
+    // }
 }

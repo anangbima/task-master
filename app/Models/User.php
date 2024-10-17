@@ -58,8 +58,6 @@ class User extends Authenticatable
         return $initials;
     }
 
-    
-
     // relasi dengan tabel member project
     public function memberProject () {
         return $this->hasMany(MemberProject::class);

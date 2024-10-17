@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\TaskController as AdminTaskController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\User\ComentController as UserComentController;
+use App\Http\Controllers\User\TaskController as UserTaskController;
 use App\Http\Controllers\User\ProjectController as UserProjectController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
@@ -62,7 +64,7 @@ Route::middleware(['auth'])->group( function () {
             'projects'          => 'project:slug',
         ])->middleware('isMemberProject');
 
-        
+        Route::post('update-status-task/{status}/{id}', [UserTaskController::class, 'updateStatusTask'])->name('update-status-task');
     });
 });
 

@@ -20,11 +20,12 @@
 
                     <div class="d-flex gap-2">
                         <a class="btn btn-success btn-sm" href="{{ route('projects.edit', $project) }}" style="z-index: 2;">Edit</a>
-                        <form style="z-index: 2;" action="{{ route('projects.destroy', $project) }}" method="POST">
+                        <a class="btn btn-danger btn-sm" id="btn-delete" data-project="{{ $project }}" href="#" style="z-index: 2;">Delete</a>
+                        {{-- <form style="z-index: 2;" action="{{ route('projects.destroy', $project) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <input class="btn btn-danger btn-sm" type="submit" value="Delete">
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>
@@ -65,5 +66,26 @@
             }
         });
     </script>
+
+<script>
+    $(document).on("click", "#btn-delete", function() {
+        console.log('hahah');
+
+        var project = $(this).attr('data-project');
+        
+        Swal2.fire({
+            icon: "question",
+            title: "Delete Project ?",
+            showConfirmButton: false,
+            // showCloseButton: true,
+            html: '<form action="{{ route('projects.destroy', 'project') }}" method="post">'+
+                    '@method('DELETE')'+
+                    '@csrf'+
+                    '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
+                '</form>'
+        })
+
+    });
+</script>
 
 @endsection
