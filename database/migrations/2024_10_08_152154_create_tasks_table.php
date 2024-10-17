@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('due_date');
             $table->time('due_hour');
             $table->enum('status', ['Done', 'In Progress', 'Not Started']);
+            $table->enum(['isNotify'], ['0', '1']);
             $table->timestamps();
         });
     }

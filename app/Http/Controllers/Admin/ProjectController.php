@@ -35,8 +35,10 @@ class ProjectController extends Controller
             'title'     => $project->name,
             'page'      => 'projects',
             'project'   => $project,
-            'users'     => User::where('role', 'user')->get() // temporary
+            'users'     => User::with('memberProject.project')->where('role', 'user')->get() // temporary
         ];
+
+        // dd($data['users']->toArray());
 
         return view('admin.projects.show', $data);
     }

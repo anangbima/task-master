@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div>
+    <div class="container">
         <form action="{{ route('projects.update', $project) }}" method="post">
             @method('PUT')
             @csrf

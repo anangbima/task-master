@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div>
+    <div class="container">
         <form action="{{ route('projects.store') }}" method="post">
             @csrf
 
@@ -28,19 +28,20 @@
                 </div>
             </div>
 
-            @foreach ($users as $user)
+            {{-- @foreach ($users as $user)
                 <div>
                     <input type="checkbox" name="member[]" id="member" value="{{ $user->id }}">
                     <label for="member">{{ $user->name }}</label>
                 </div>
-            @endforeach
+            @endforeach --}}
 
-            <input type="text" class="form-control" id="select-user">
-            
-            <div class="position-relative">
-                <div class="card p-3 border rounded-1 position-absolute w-100" id="list-user">
-                    
-                </div>
+            <div class="form-group">
+                <label for="member">Member</label>
+                <select class="choices form-select multiple-remove" id="member" name="member[]" multiple="multiple">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
             </div>
             
             <div class="mt-3 ">
@@ -48,26 +49,4 @@
             </div>
         </form>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            let users = {!! $users->toJson() !!}
-            $('#list-user').hide();
-
-            $('#select-user').on('change keyup', function() {
-                let value = $(this).val();
-                
-                $('#list-user').show();
-
-                let filterUser = users.filter(function(item) {
-                    return item.name == value;
-                })
-
-                $.each(filterUser, function(index, item) {
-                    $('#list-user').append('<li>' + item.name + '</li>');
-                })
-            })
-        });
-    </script>
-</script>
 @endsection

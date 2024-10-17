@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckRole;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,6 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'isMemberProject'   =>  \App\Http\Middleware\isMemberProject::class,
             'isMemberTask'      =>  \App\Http\Middleware\isMemberTask::class,
         ]);
+    })
+    ->withSchedule(function(Schedule $schedule){
+        $schedule->command('send-emails')->everyTenSeconds();
+        
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

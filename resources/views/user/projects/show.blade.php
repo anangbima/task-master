@@ -581,6 +581,4 @@
         });
     </script>
 
-    <input type="hidden" name="id" value="">
-
 @endsection
