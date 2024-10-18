@@ -22,7 +22,7 @@ return new class extends Migration
             $table->time('due_hour');
             $table->enum('status', ['Done', 'In Progress', 'Not Started']);
             $table->boolean('isNotify')->default(false);
-            // $table->enum('isNotify', [1, 0])->default(0);
+            // $table->enum('isNotify', [true, false])->default(false);
             $table->timestamps();
         });
     }

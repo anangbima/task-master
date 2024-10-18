@@ -18,7 +18,6 @@ class Task extends Model
         'due_date',
         'due_hour',
         'project_id',
-        'isNotify'
     ];
 
     public function scopeTaskStatus($query, $key){

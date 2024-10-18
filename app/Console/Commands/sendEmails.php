@@ -32,16 +32,19 @@ class sendEmails extends Command
     { 
         $now = Carbon::now();
         $addDay = $now->copy()->addDay();
-        $tasks = Task::with('member.user')->whereBetween('due_date', [$now, $addDay])->where('isNotify', false)->get();
-        if ($tasks) {
-            foreach($tasks as $task) {
+        $tasks = Task::with('member.user')
+            ->where('isNotify', false)
+            ->whereBetween('due_date', [$now, $addDay])
+            ->get();
+
+        if ($tasks->isNotEmpty()) { // Pastikan ada data
+            foreach ($tasks as $task) {
                 foreach ($task->member as $member) {
-                    Mail::to($member->user->email)->send(new SendMail(['name' =>$member->user->name ]));
-                    $task->update(['isNotify', true]);
+                    Mail::to($member->user->email)
+                        ->send(new SendMail(['name' => $member->user->name]));
                 }
+                $task->update(['isNotify' => true]); // Memperbaiki cara update
             }
         }
-        // foreach($tasks as $task) {
-        // }
     }
 }

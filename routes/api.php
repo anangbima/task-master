@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
     Route::middleware(['isAdmin'])->group(function () {
