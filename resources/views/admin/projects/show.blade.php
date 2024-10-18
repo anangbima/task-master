@@ -211,13 +211,29 @@
                                                 </div>
                                             </div>
                                             <div class="col-2 text-end">
-                                                @foreach ($task->member as $member)
-                                                    <div class="avatar bg-warning" style="width: 26px; height: 26px; margin-left: -10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">
-                                                        {{ $member->user->imagePicture }}
+                                                <div class="position-relative">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div>
+                                                            @foreach ($task->member as $member)
+                                                                <div class="avatar bg-warning" style="width: 26px; height: 26px; margin-left: -10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">
+                                                                    {{ $member->user->imagePicture }}
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="dropdown" style="z-index: 2; width:">
+                                                            <a class="" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href="">Edit</a></li>
+                                                                <li><a class="dropdown-item text-danger" id="btn-delete" href="#">Remove</a></li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
                                             </div>
                                         </div>
+
                                         <a 
                                             href="#" 
                                             class="stretched-link" 
@@ -264,10 +280,11 @@
                                         <thead>
                                             <tr>
                                                 <th>User</th>
-                                                <th class="text-end">Added at</th>
+                                                <th class="">Added at</th>
+                                                <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="data-member-project">
                                             @foreach ($project->member as $member)
                                                 <tr>
                                                     <td>
@@ -281,10 +298,18 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="text-end">
+                                                    <td class="">
                                                         <div class="fw-light">
                                                             {{ $member->user->created_at }}
                                                         </div>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        {{-- <form action="{{ route('member-project.destroy', $member) }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <input class="btn btn-danger btn-sm" type="submit" value="Remove">
+                                                        </form> --}}
+                                                        <a href="#" id="btn-delete-member" class="btn btn-danger btn-sm" data-val="{{ $member }}">Remove</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -329,153 +354,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-        {{-- <div class="mb-4">
-            {!! $project->description !!}
-        </div> --}}
-
-        {{-- <div class="mb-3 d-flex align-items-center justify-content-between">
-            <h5>Task</h5>
-
-            <div >
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTask">Create new</a>
-            </div>
-        </div>  --}}
-
-        {{-- <div id="data-view" class="row">
-            @forelse ($project->task as $task)
-                <div class="col-lg-4 col-sm-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>{{ $task->title }}</h5>
-
-                            <div class="progress progress-sm mt-3" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-success" style="width: 25%"></div>
-                            </div>
-
-                            <div class="mt-4 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge rounded-pill text-bg-danger text-sm px-2" style="font-size: 12px">
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <i class="bi bi-calendar2-event"></i> 
-                                        </div>
-                                    </span>
-                                </div>
-            
-                                <div class="d-flex">
-                                    <div style="margin-left: -10px">
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                                    </div>
-                                    <div style="margin-left: -10px">
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                                    </div>
-                                    <div style="margin-left: -10px">
-                                        <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 24px; height: 24px"></img>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <a 
-                                href="#" 
-                                class="stretched-link" 
-                                id="btn-detail-task" 
-                                data-task="{{ $task }}" 
-                                data-member="{{ $task->member->map(fn($q) => collect([ 'user' => $q->user, 'member' => $q])) }}"
-                                data-coment="{{ $task->coment }}"
-                            ></a>
-
-                        </div>
-                    </div>   
-                </div>
-            @empty
-                <div class="w-100 position-relative" style="min-height: 500px">
-                    <div class="position-absolute top-50 start-50 translate-middle text-center">
-                        <h5>No Tasks</h5>
-                        <div>There is no task available on this list yet.</div>
-                    </div>
-                </div>
-            @endforelse
-        </div> --}}
-
-        {{-- <div class="mb-3 d-flex align-items-center justify-content-between">
-            <h5>Member</h5>
-
-            <div>
-                <a href="#" class="btn btn-primary" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#addMember">Add</a>
-            </div>
-
-            <div class="modal fade text-left modal-borderless" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Member</h5>
-                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <i data-feather="x"></i>
-                            </button>
-                        </div>
-
-                        <form action="{{ route('member-project.store') }}" method="POST">
-                            @csrf
-
-                            <div class="modal-body">
-                                <input type="hidden" name="project_id" value="{{ $project->id }}">
-                                @foreach ($users as $user)
-                                    <div>
-                                        <input type="checkbox" name="user_id[]" id="member" value="{{ $user->id }}">
-                                        <label for="member">{{ $user->name }}</label>
-                                    </div>
-                                @endforeach
-                                
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Close</span>
-                                </button>
-                                <input type="submit" class="btn btn-primary" value="Add">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>  --}}
-
-        {{-- <div class="mb-3 card">
-            <div class="card-body">
-                @forelse ($project->member as $member)
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width:32px; height: 32px"></img>
-
-                            <div>
-                                {{ $member->user->name }}
-                            </div>
-                        </div>
-
-                        <div class="fst-italic font-weight-light">
-                            Add on {{ $member->created_at}}
-                        </div>
-
-                        <div>
-                            <form style="z-index: 2;" action="{{ route('member-project.destroy', $member) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input class="btn btn-danger btn-sm" type="submit" value="Remove">
-                            </form>
-                        </div>
-                    </div>
-                @empty
-                    <div class="w-100 position-relative" style="min-height: 400px">
-                        <div class="position-absolute top-50 start-50 translate-middle text-center">
-                            <h5>No Members</h5>
-                            <div>There is no data available on this list yet.</div>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </div> --}}
     </div>
 
     {{-- Modal tambah task --}}
@@ -880,16 +758,35 @@
         });
     </script>
 
+    <script>
+        $(document).on("click", "#btn-delete", function() {
+            var project = $(this).attr('data-project');
+            var projectJson = $.parseJSON(project);
+            
+            Swal2.fire({
+                icon: "question",
+                title: "Delete Project ?",
+                showConfirmButton: false,
+                html: '<form action="{{ url("admin/projects/") }}/'+projectJson.slug+'" method="post">'+
+                        '@method("DELETE")'+
+                        '@csrf'+
+                        '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
+                    '</form>'
+            })
+
+        });
+    </script>
+
 <script>
-    $(document).on("click", "#btn-delete", function() {
-        var project = $(this).attr('data-project');
-        var projectJson = $.parseJSON(project);
+    $('#data-member-project').on("click", "#btn-delete-member", function() {
+        var member = $(this).attr('data-val');
+        var memberJson = $.parseJSON(member);
         
         Swal2.fire({
             icon: "question",
-            title: "Delete Project ?",
+            title: "Remove member ?",
             showConfirmButton: false,
-            html: '<form action="{{ url("admin/projects/") }}/'+projectJson.slug+'" method="post">'+
+            html: '<form action="{{ url("admin/member-project/") }}/'+memberJson.id+'" method="post">'+
                     '@method("DELETE")'+
                     '@csrf'+
                     '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
@@ -898,141 +795,5 @@
 
     });
 </script>
-
-    {{-- <script>
-        $(document).ready(function () {
-            $('#data-view').on('click', '#btn-detail-task', function() {
-                var task = $(this).attr('data-task');
-                var taskMember = $(this).attr('data-member');
-                var taskComent = $(this).attr('data-coment');
-
-                var taskJson = $.parseJSON(task);
-                var taskMemberJson = $.parseJSON(taskMember);
-                var taskComentJson = $.parseJSON(taskComent);
-                
-                $('#title-view').html(taskJson.title);
-                $('#task-id').val(taskJson.id);
-                $('#description-view').html(taskJson.description);
-                $('#status-view').html(showStatus(taskJson.status));
-                $('#priority-view').html(showPriority(taskJson.priority));
-                $('#due-view').html('<i class="bi bi-calendar2"></i> ' + taskJson.due_date +' '+taskJson.due_hour);
-
-                showDataComent(taskComentJson);
-                showDataMember(taskMemberJson);
-
-                $('#detailTask').modal('show');
-            })
-
-            // Menampilkan status pada modal detail tasks
-            function showStatus(status) {
-                var htmlStatus = '';
-                var statusColor = '';
-                var statusValue = [];
-
-                if (status == 'Not Started') {
-                    statusColor = 'text-bg-danger';
-                    statusValue = [
-                        'In Progress',
-                        'Done',
-                    ]
-                }
-                if (status == 'In Progress') {
-                    statusColor = 'text-bg-warning';
-                    statusValue = [
-                        'Not Started',
-                        'Done',
-                    ]
-                }
-                if (status == 'Done') {
-                    statusColor = 'text-bg-success';
-                    statusValue = [
-                        'In Progress',
-                        'Not Started',
-                    ]
-                }
-
-                htmlStatus = '<div class="dropdown">'
-                                    + '<div class="badge '+ statusColor +' dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">'
-                                    + status 
-                                    + '</div>'
-                                    + '<ul class="dropdown-menu" id="dropdown-status">'
-                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[0]+'">'+statusValue[0]+'</a></li>'
-                                    +   '<li><a href="#" class="dropdown-item" id="btn-update-status" status-value="'+statusValue[1]+'">'+statusValue[1]+'</a></li>'
-                                    + '</ul>'
-
-                return htmlStatus
-            }
-
-            // Menampilkan priority pada modal detail task
-            function showPriority(priority) {
-                var htmlPriority = '';
-                var priorityColor = '';
-                
-                if (priority == 'High') {
-                    priorityColor = 'text-bg-danger'
-                }
-                if (priority == 'Medium') {
-                    priorityColor = 'text-bg-warning'
-                }
-                if (priority == 'Low') {
-                    priorityColor = 'text-bg-success'
-                }
-
-                htmlPriority = '<span class="badge '+priorityColor+'">'+priority+'</span>'
-
-                return htmlPriority
-            }
-
-            // Menampilkan coment 
-            function showDataComent(coments) {
-                var htmlComent = '';
-
-                if (coments.length == 0) {
-                    htmlComent = '<div class="w-100 position-relative" style="min-height: 100px">'
-                                    + '<div class="position-absolute top-50 start-50 translate-middle text-center">'
-                                    +   '<div>There is no coment yet.</div>'
-                                    + '</div>'
-                                    + '</div>'
-                }else{
-                    
-                    for (var index = 0; index < coments.length; index++) {
-                        htmlComent = htmlComent + '<div style="font-size: 12px" class="fw-bold">'
-                                                +   coments[index].created_at
-                                                + '</div>'
-                                                + '<div class="card">'
-                                                +   '<div class="card-body p-3">'
-                                                +       coments[index].content
-                                                +   '</div>'
-                                                + '</div>'
-                    }
-                }
-                
-
-                $('#coment-view').html(htmlComent);
-            }
-
-            // Menampilkan data member dari task
-            function showDataMember(members){
-                var htmlMember = '';
-
-                for (var index = 0; index < members.length; index++) {
-                    htmlMember = htmlMember + '<div class="d-flex gap-2 align-items-center mb-3">'
-                                            +       '<img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 32px; height: 32px"></img>'
-                                            +       '<span>'
-                                            +           members[index].user.name
-                                            +       '</span>'
-                                            +   '</div>'
-                }
-
-                $('#member-view').html(htmlMember);
-            }
-            
-            // click update status task
-            // $('#status-view').on('click', '.dropdown-item',function(e) {
-            //     var status = $(this).attr('status-value');
-                
-            // })
-        });
-    </script> --}}
 
 @endsection

@@ -467,6 +467,9 @@
 
                 showDataComent(taskComentJson);
                 showDataMember(taskMemberJson);
+                
+                console.log(taskMemberJson);
+                
 
                 $('#detailTask').modal('show');
             })

@@ -76,4 +76,14 @@ class TaskController extends Controller
         session()->flash('success', 'Successfully delete task');
         return back();
     }
+
+    public function updateStatus(Request $request) {
+        $task = Task::find($request->id);
+        $task->update([
+            'status'    => $request->status
+        ]);
+
+        session()->flash('success', 'Successfully update status');
+        return back();
+    }
 }

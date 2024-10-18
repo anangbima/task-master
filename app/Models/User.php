@@ -60,6 +60,8 @@ class User extends Authenticatable
         return $initials;
     }
 
+    // get data
+
     public function getImagePictureAttribute() {
 
         if ($this->image == '') {
