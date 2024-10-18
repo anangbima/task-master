@@ -13,9 +13,7 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, exercitationem excepturi voluptatum neque repellendus libero pariatur molestias aliquid similique ipsa nihil nemo natus dolor eius optio soluta fugiat quaerat voluptatibus?
         </div>
         <div class="card mt-4">
-            <div class="card-body">
-                <a href="{{ route('send-mail') }}" class="btn btn-primary">Kirim email</a>
-            </div>
+
         </div>
     </div>
     

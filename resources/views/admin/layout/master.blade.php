@@ -170,7 +170,7 @@
                                 </div>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ route('admin-profile') }}">Profile</a>
+                                {{-- <a class="dropdown-item" href="{{ route('admin-profile') }}">Profile</a> --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>

@@ -16,9 +16,6 @@
                     <a class="nav-link" id="v-pills-tasks-tab" data-bs-toggle="pill"
                         href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks"
                         aria-selected="false">Tasks</a>
-                    <a class="nav-link" id="v-pills-timeline-tab" data-bs-toggle="pill"
-                        href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline"
-                        aria-selected="false">Timeline</a>
                     <a class="nav-link" id="v-pills-other-tab" data-bs-toggle="pill"
                         href="#v-pills-other" role="tab" aria-controls="v-pills-other"
                         aria-selected="false">Member</a>
@@ -225,8 +222,8 @@
                                                                 <i class="bi bi-three-dots-vertical"></i>
                                                             </a>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" id="btn-delete" href="#">Remove</a></li>
+                                                                <li><a class="dropdown-item" href="{{ route('tasks.edit', $task) }}">Edit</a></li>
+                                                                <li><a class="dropdown-item text-danger" id="btn-delete-task" data-task="{{ $task }}" href="#">Remove</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -254,14 +251,6 @@
                             @endforelse
                         </div>
 
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-timeline" role="tabpanel"
-                        aria-labelledby="v-pills-timeline-tab">
-                        Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce
-                        non sapien sit amet magna dapibus
-                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a
-                        mauris ex. Ut finibus risus sed massa
-                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies.
                     </div>
                     <div class="tab-pane fade" id="v-pills-other" role="tabpanel"
                         aria-labelledby="v-pills-other-tab">
@@ -389,7 +378,7 @@
                             <select name="priority" id="priority" class="form-select @error('priority') is-invalid @enderror">
                                 <option value=""></option>
                                 <option value="High">High</option>
-                                <option value="High">Medium</option>
+                                <option value="Medium">Medium</option>
                                 <option value="Low">Low</option>
                             </select>
                             <div class="invalid-feedback">
@@ -725,7 +714,6 @@
 
                 for (var index = 0; index < members.length; index++) {
                     htmlMember = htmlMember + '<div class="d-flex gap-2 align-items-center mb-3">'
-                                            +       '<img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 32px; height: 32px"></img>'
                                             +       '<span>'
                                             +           members[index].user.name
                                             +       '</span>'
@@ -755,6 +743,23 @@
                         '</form>'
                 })
             })
+
+            // click update status task
+            $(document).on('click', '#btn-delete-task',function() {
+                var task = $(this).attr('data-task');
+                var taskJson = $.parseJSON(task);
+                
+                Swal2.fire({
+                    icon: "question",
+                    title: "Delete task ?",
+                    showConfirmButton: false,
+                    html: '<form action="{{ url("admin/tasks/") }}/'+taskJson.id+'" method="post">'+
+                            '@method("DELETE")'+
+                            '@csrf'+
+                            '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
+                        '</form>'
+                })
+            })
         });
     </script>
 
@@ -777,23 +782,23 @@
         });
     </script>
 
-<script>
-    $('#data-member-project').on("click", "#btn-delete-member", function() {
-        var member = $(this).attr('data-val');
-        var memberJson = $.parseJSON(member);
-        
-        Swal2.fire({
-            icon: "question",
-            title: "Remove member ?",
-            showConfirmButton: false,
-            html: '<form action="{{ url("admin/member-project/") }}/'+memberJson.id+'" method="post">'+
-                    '@method("DELETE")'+
-                    '@csrf'+
-                    '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
-                '</form>'
-        })
+    <script>
+        $('#data-member-project').on("click", "#btn-delete-member", function() {
+            var member = $(this).attr('data-val');
+            var memberJson = $.parseJSON(member);
+            
+            Swal2.fire({
+                icon: "question",
+                title: "Remove member ?",
+                showConfirmButton: false,
+                html: '<form action="{{ url("admin/member-project/") }}/'+memberJson.id+'" method="post">'+
+                        '@method("DELETE")'+
+                        '@csrf'+
+                        '<button type="submit" class="btn btn-primary text-white mt-4 p-2">Hapus</button>'+
+                    '</form>'
+            })
 
-    });
-</script>
+        });
+    </script>
 
 @endsection

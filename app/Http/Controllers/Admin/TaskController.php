@@ -51,15 +51,32 @@ class TaskController extends Controller
         return back();
     }
 
-    
+    // Display edit data
+    public function edit(Task $task) {
+        $data = [
+            'title'     => 'Update Task',
+            'page'      => 'Taks',
+            'task'         => $task
+        ];
+
+        return view('admin.tasks.update', $data);
+    }
 
     // Update spesific data in task 
     public function update(UpdateTaskRequest $request, Task $task) {
         $data = $request->validated();
-        $task->update($data);
+        $task->update([
+            'title'         => $data['title'],
+            'description'   => $data['description'],
+            'priority'      => $data['priority'],
+            'due_date'      => $request->due_date, 
+            'due_hour'      => $request->due_hour, 
+        ]);
+
+        // $task->update($data);
 
         session()->flash('success', 'Successfully update task');
-        return back();
+        return redirect('/admin/projects/'.$task->project->slug);
     }
 
     // Remove spesific data in project

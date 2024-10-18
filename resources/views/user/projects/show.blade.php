@@ -24,9 +24,6 @@
                     <a class="nav-link" id="v-pills-tasks-tab" data-bs-toggle="pill"
                         href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks"
                         aria-selected="false">Tasks</a>
-                    <a class="nav-link" id="v-pills-timeline-tab" data-bs-toggle="pill"
-                        href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline"
-                        aria-selected="false">Timeline</a>
                     <a class="nav-link" id="v-pills-other-tab" data-bs-toggle="pill"
                         href="#v-pills-other" role="tab" aria-controls="v-pills-other"
                         aria-selected="false">Other</a>
@@ -243,14 +240,6 @@
                             @endforelse
                         </div>
 
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-timeline" role="tabpanel"
-                        aria-labelledby="v-pills-timeline-tab">
-                        Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce
-                        non sapien sit amet magna dapibus
-                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a
-                        mauris ex. Ut finibus risus sed massa
-                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies.
                     </div>
                     <div class="tab-pane fade" id="v-pills-other" role="tabpanel"
                         aria-labelledby="v-pills-other-tab">
@@ -551,7 +540,6 @@
 
                 for (var index = 0; index < members.length; index++) {
                     htmlMember = htmlMember + '<div class="d-flex gap-2 align-items-center mb-3">'
-                                            +       '<img src="{{ url('/user/default.png') }}" class="rounded-circle" style="width: 32px; height: 32px"></img>'
                                             +       '<span>'
                                             +           members[index].user.name
                                             +       '</span>'
