@@ -77,7 +77,3 @@ Route::middleware(['auth'])->group( function () {
 Route::get('unauthorized', function() {
     return view('errors.403');
 })->name('unauthorized');
-
-Route::get('mail',function(){
-    Mail::to("coba@abc.ocom")->send(new SendMail('coba'));
-});

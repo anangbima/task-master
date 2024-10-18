@@ -5,6 +5,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+// use Illuminate\Support\Facades\Schedule;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,10 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'isMemberTask'      =>  \App\Http\Middleware\isMemberTask::class,
         ]);
     })
-    ->withSchedule(function(Schedule $schedule){
-        $schedule->command('send-emails')->everyTenSeconds();
-        
-    })
+    // ->withSchedule(function(Schedule $schedule ){
+    //     $schedule->command('send:emails')->everyTenSeconds();
+    // })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

@@ -35,7 +35,8 @@ class TaskController extends Controller
             'priority'      => $data['priority'],
             'due_date'      => $request->due_date, 
             'due_hour'      => $request->due_hour ?? '00:00:00', 
-            'project_id'    => $request->project_id
+            'project_id'    => $request->project_id,
+            // 'isNotify'      => false
         ]);
 
         if ($task && $request->member != null) {
