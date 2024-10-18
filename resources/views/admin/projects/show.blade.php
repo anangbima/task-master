@@ -569,13 +569,22 @@
 
                     <div class="modal-body">
                         <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        @foreach ($users as $user)
+                        {{-- @foreach ($users as $user)
                             <div>
                                 <input type="checkbox" name="user_id[]" id="member" value="{{ $user->id }}">
                                 <label for="member">{{ $user->name }}</label>
                             </div>
-                        @endforeach
-                        
+                        @endforeach --}}
+
+                        <div class="form-group">
+                            <label for="member">Member</label>
+                            <select class="choices form-select multiple-remove" id="user_id" name="user_id[]" multiple="multiple">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">

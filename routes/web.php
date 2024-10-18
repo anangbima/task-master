@@ -13,6 +13,8 @@ use App\Http\Controllers\User\ComentController as UserComentController;
 use App\Http\Controllers\User\TaskController as UserTaskController;
 use App\Http\Controllers\User\ProjectController as UserProjectController;
 use App\Http\Controllers\User\UserController as UserUserController;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -76,3 +78,6 @@ Route::get('unauthorized', function() {
     return view('errors.403');
 })->name('unauthorized');
 
+Route::get('mail',function(){
+    Mail::to("coba@abc.ocom")->send(new SendMail('coba'));
+});
